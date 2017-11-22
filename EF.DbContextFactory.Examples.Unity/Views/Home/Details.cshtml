@@ -1,0 +1,52 @@
+﻿@model  EF.DbContextFactory.Examples.Data.Entity.Order
+
+@{
+    ViewBag.Title = "Order Details";
+}
+
+<h2>Order @Model.Id:</h2>
+
+<p>
+    @Html.ActionLink("Regresar", "Index")
+</p>
+<div class="row">
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>
+                    Item Id
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Unit Price
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.OrderItems)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitPrice)
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@model  List<EF.DbContextFactory.Examples.StructureMap.Models.OrderViewModel>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { name = "ordersForm", id = "ordersForm" }))
+{    
+    <h1>Multiple threads <strong>with</strong> EF.DbContextFactory</h1>
+    <div class="row col-md-12">
+         <ul class="nav navbar-nav text-left">
+             <li>@Html.ActionLink("Create Static Orders", "Create")</li>
+             <li>@Html.ActionLink("Delete Selected Orders", "Delete", null, new { @class = "delete", onclick = "return false;" })</li>
+         </ul>
+     </div>
+    <div class="row col-md-12">
+        <span style="font-style: italic">
+            <strong>"Create Static Orders" button create 3 orders at the same time in 3 different threads.</strong>
+        </span>
+        <br/>
+        <span style="font-style: italic">
+            <strong>"Delete" button deletes the selected orders at the same time in different threads.</strong>
+        </span>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="container">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                @for (int i = 0; i < Model.Count(); i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.TextBoxFor(m => m[i].Id, new { @class = "text-label" })
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m[i].Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m[i].Description)
+                        </td>
+                        <td>
+                            @Html.CheckBoxFor(m => m[i].Selected)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new {id = Model[i].Id})
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('.delete').click(function () {
+                var form = document.getElementById("ordersForm");
+                form.action = "/Home/Delete";
+                form.submit();
+            });
+        });
+    </script>
+}
