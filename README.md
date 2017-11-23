@@ -25,10 +25,32 @@ The Entity Framework DbContext has a well-known problem: it's not thread safe. S
 ## The Solutions
 There are multiple solutions to manage concurrency scenarios from data perspective, the most common patterns are *Pessimistic Concurrency (Locking)* and *Optimistic Concurrency*, actually Entity Framework has an implementation of [Optimistic Concurrency](https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application). So these solutions are implemented usually on the database side or even in both, backend and database sides, but the problem with DbContext is that's happening on memory, don't even in database. An approach what allows you to keep your code clean, follow good practices and keep on using Entity Framework and obvoiusly that works fine in multiple threads is injecting a factory in your repositories/unit of work (or whatever you're using it ~~code smell~~) insetead of the instance itself and use it and despose it as soon as possible.
 
-## Upsides
-
-## Downsides
+## Key points
+* Dispose DbContext immediately.
+* Less consume of memory.
+* Create the instance and connection database only when you really need it.
+* Works in concurrency scenarios.
+* Without locking.
 
 ## Getting Started
 
 EF.DbContextFactory provides you integration with most popular dependency injection frameworks such as [Unity](https://github.com/unitycontainer/unity), [Ninject](http://www.ninject.org/), [Structuremap](http://structuremap.github.io/) and [.Net Core](https://dotnet.github.io/). So there are for now five Nuget packages listed above that you can use like an extension to inject your DbContext as a factory.
+
+All of nuget packages add an generic extension method to the dependency injection framework container called `AddDbContextFactory`. It needs the derived DbContext Type and as an optional parameter, the name or the connection string itself. ***If you have the default one (DefaultConnection) in the configuration file, you dont need to specify it***
+
+> **EFCore.DbContextFactory** nuget package is slightly different and will be explained later.
+
+### Ninject Asp.Net Mvc and Web Api
+If you are using Ninject as DI container you must install [EF.DbContextFactory.Ninject](https://www.nuget.org/packages/EF.DbContextFactory.Ninject/) nuget package. After that you can access to the extension method from the `Kernel` object from Ninject.
+
+```cs
+using EF.DbContextFactory.Ninject.Extensions;
+.
+.
+.
+kernel.AddDbContextFactory<OrderContext>();
+``` 
+
+## Contribution
+
+Your contributions are always welcome, feel free to improve or create new extensions for others dependency injection frameworks! All your work should be done in your forked repository. Once you finish your work, please send a pull request onto dev branch for review.
