@@ -17,3 +17,6 @@ With EF.DbContextFactory you can resolve easily your DbContext dependencies in a
 * EF.DbContextFactory.StructureMap.WebApi
 [![](https://img.shields.io/nuget/v/EF.DbContextFactory.StructureMap.WebApi.svg)](https://www.nuget.org/packages/EF.DbContextFactory.StructureMap.WebApi/)
 
+## Getting Started
+
+EF.DbContextFactory provides you integration with most popular dependency injection frameworks such as [Unity](https://github.com/unitycontainer/unity), [Ninject](http://www.ninject.org/), [Structuremap](http://structuremap.github.io/) and [.Net Core](https://dotnet.github.io/).
