@@ -17,6 +17,18 @@ With EF.DbContextFactory you can resolve easily your DbContext dependencies in a
 * EF.DbContextFactory.StructureMap.WebApi
 [![](https://img.shields.io/nuget/v/EF.DbContextFactory.StructureMap.WebApi.svg)](https://www.nuget.org/packages/EF.DbContextFactory.StructureMap.WebApi/)
 
+## The Problem
+The Entity Framework DbContext has a well-known problem: it's not thread safe. So it means, you can't got an instance of the same entity class tracked by multiple contexts at the same time. For example, if you have a realtime, collaborative, concurrency or reactive application/scenario, using, for instance, SignalR or multiple threads in background (which are common characteristics in modern applications) I bet you have faced with this kind of exception: 
+
+***"The context cannot be used while the model is being created. This exception may be thrown if the context is used inside the OnModelCreating method or if the same context instance is accessed by multiple threads concurrently. Note that instance members of DbContext and related classes are not guaranteed to be thread safe"***
+
+## The Solutions
+There are multiple solutions to manage concurrency scenarios from data perspective, the most common patterns are *Pessimistic Concurrency (Locking)* and *Optimistic Concurrency*, actually Entity Framework has an implementation of [Optimistic Concurrency](https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application). So these solutions are implemented usually on the database side or even in both, backend and database sides, but the problem with DbContext is that's happening on memory, don't even in database. An approach what allows you to keep your code clean, follow good practices and keep on using Entity Framework and obvoiusly that works fine in multiple threads is injecting a factory in your repositories/unit of work (or whatever you're using it --code smell--) insetead of the instance itself and use it and despose it as soon as possible.
+
+## Upsides
+
+## Downsides
+
 ## Getting Started
 
-EF.DbContextFactory provides you integration with most popular dependency injection frameworks such as [Unity](https://github.com/unitycontainer/unity), [Ninject](http://www.ninject.org/), [Structuremap](http://structuremap.github.io/) and [.Net Core](https://dotnet.github.io/).
+EF.DbContextFactory provides you integration with most popular dependency injection frameworks such as [Unity](https://github.com/unitycontainer/unity), [Ninject](http://www.ninject.org/), [Structuremap](http://structuremap.github.io/) and [.Net Core](https://dotnet.github.io/). So there are for now five Nuget packages listed above that you can use like an extension to inject your DbContext as a factory.
