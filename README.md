@@ -177,7 +177,7 @@ services.AddDbContextFactory<OrderContext>(builder => builder
 
 You can find the examples in this repository and you can see the examples with Ninject, Structuremap, Structuremap.WebApi, Unity and Asp.Net Core, all you need is to run the migrations and that's it. Every example project has two controllers, one to receive a repository that implements the DbContextFactory and another one that doesn't and every one creates and deletes orders at the same time in different threads to simulate the concurrency. So you can see how the one that doesn't implement the DbContextFactory throws errors related to concurrency issues.
 
-
+![](example.gif)
 
 ## Contribution
 
