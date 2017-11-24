@@ -36,12 +36,59 @@ There are multiple solutions to manage concurrency scenarios from data perspecti
 
 EF.DbContextFactory provides you integration with most popular dependency injection frameworks such as [Unity](https://github.com/unitycontainer/unity), [Ninject](http://www.ninject.org/), [Structuremap](http://structuremap.github.io/) and [.Net Core](https://dotnet.github.io/). So there are for now five Nuget packages listed above that you can use like an extension to inject your DbContext as a factory.
 
-All of nuget packages add an generic extension method to the dependency injection framework container called `AddDbContextFactory`. It needs the derived DbContext Type and as an optional parameter, the name or the connection string itself. ***If you have the default one (DefaultConnection) in the configuration file, you dont need to specify it***
+All of nuget packages add a generic extension method to the dependency injection framework container called `AddDbContextFactory`. It needs the derived DbContext Type and as an optional parameter, the name or the connection string itself. ***If you have the default one (DefaultConnection) in the configuration file, you dont need to specify it***
 
 > **EFCore.DbContextFactory** nuget package is slightly different and will be explained later.
 
+The other thing what you need is to inject your DbContext as a factory instead of the instance itself:
+
+```cs
+public class OrderRepositoryWithFactory : IOrderRepository
+{
+    private readonly Func<OrderContext> _factory;
+
+    public OrderRepositoryWithFactory(Func<OrderContext> factory)
+    {
+        _factory = factory;
+    }
+    .
+    .
+    .
+}
+``` 
+
+And then just use it when you need it executing the factory, you can do that with the `Invoke` method or implicitly just using the parentheses and that's it!
+
+```cs
+public class OrderRepositoryWithFactory : IOrderRepository
+{
+    .
+    .
+    .
+    public void Add(Order order)
+    {
+        using (var context = _factory.Invoke())
+        {
+            context.Orders.Add(order);
+            context.SaveChanges();
+        }
+    }
+    
+    public void DeleteById(Guid id)
+    {
+        // implicit way way
+        using (var context = _factory())
+        {
+            var order = context.Orders.FirstOrDefault(x => x.Id == id);
+            context.Entry(order).State = EntityState.Deleted;
+            context.SaveChanges();
+        }
+    }
+}
+``` 
+
 ### Ninject Asp.Net Mvc and Web Api
-If you are using Ninject as DI container you must install [EF.DbContextFactory.Ninject](https://www.nuget.org/packages/EF.DbContextFactory.Ninject/) nuget package. After that you can access to the extension method from the `Kernel` object from Ninject.
+If you are using Ninject as DI container into your Asp.Net Mvc or Web Api project you must install [EF.DbContextFactory.Ninject](https://www.nuget.org/packages/EF.DbContextFactory.Ninject/) nuget package. After that, you are able to access to the extension method from the `Kernel` object from Ninject.
 
 ```cs
 using EF.DbContextFactory.Ninject.Extensions;
@@ -49,6 +96,17 @@ using EF.DbContextFactory.Ninject.Extensions;
 .
 .
 kernel.AddDbContextFactory<OrderContext>();
+``` 
+
+### StructureMap Asp.Net Mvc and Web Api
+If you are using StructureMap as DI container into your Asp.Net Mvc or Web Api project you must install [EF.DbContextFactory.StructureMap](https://www.nuget.org/packages/EF.DbContextFactory.StructureMap/) nuget package. After that, you are able to access to the extension method from the `Registry` object from StructureMap.
+
+```cs
+using EF.DbContextFactory.StructureMap.Extensions;
+.
+.
+.
+this.AddDbContextFactory<OrderContext>();
 ``` 
 
 ## Contribution
