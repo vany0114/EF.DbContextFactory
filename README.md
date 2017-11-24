@@ -109,6 +109,28 @@ using EF.DbContextFactory.StructureMap.Extensions;
 this.AddDbContextFactory<OrderContext>();
 ``` 
 
+### StructureMap 4.1.0.361 Asp.Net Mvc and Web Api or WebApi.StructureMap
+If you are using StructureMap >= `4.1.0.361` as DI container or or WebApi.StructureMap for Web Api projects you must install [EF.DbContextFactory.StructureMap.WebApi](https://www.nuget.org/packages/EF.DbContextFactory.StructureMap.WebApi/) nuget package. After that, you are able to access to the extension method from the `Registry` object from StructureMap. (In my opinion this StructureMap version is is cleaner)
+
+```cs
+using EF.DbContextFactory.StructureMap.WebApi.Extensions;
+.
+.
+.
+this.AddDbContextFactory<OrderContext>();
+``` 
+
+### Unity Asp.Net Mvc and Web Api
+If you are using Unity as DI container into your Asp.Net Mvc or Web Api project you must install [EF.DbContextFactory.Unity](https://www.nuget.org/packages/EF.DbContextFactory.Unity/) nuget package. After that, you are able to access to the extension method from the `UnityContainer` object from Unity.
+
+```cs
+using EF.DbContextFactory.Unity.Extensions;
+.
+.
+.
+container.AddDbContextFactory<OrderContext>();
+``` 
+
 ## Contribution
 
 Your contributions are always welcome, feel free to improve or create new extensions for others dependency injection frameworks! All your work should be done in your forked repository. Once you finish your work, please send a pull request onto dev branch for review.
