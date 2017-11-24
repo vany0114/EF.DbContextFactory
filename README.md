@@ -131,6 +131,48 @@ using EF.DbContextFactory.Unity.Extensions;
 container.AddDbContextFactory<OrderContext>();
 ``` 
 
+### Asp.Net Core
+If you are working with Asp.Net Core you probably know that it brings its own Dependency Injection container, so you don't need to install another package or framework to deal with it. So you only need to install [EFCore.DbContextFactory](https://www.nuget.org/packages/EFCore.DbContextFactory/) nuget package. After that, you are able to access to the extension method from the `ServiceCollection` object from Asp.Net Core. 
+
+>EFCore.DbContextFactory is supported from .Net Core 2.0.
+
+The easiest way to resolve your DbContext factory is using the extension method called `AddSqlServerDbContextFactory`. It automatically configures your DbContext to use SqlServer and you can pass it optionally  the name or the connection string itself ***If you have the default one (DefaultConnection) in the configuration file, you dont need to specify it*** and your `ILoggerFactory`, if you want.
+
+```cs
+using EFCore.DbContextFactory.Extensions;
+.
+.
+.
+services.AddSqlServerDbContextFactory<OrderContext>();
+``` 
+
+Also you can use the known method `AddDbContextFactory` with the difference that it receives the `DbContextOptionsBuilder` object in order that you're able to build your DbContext as you need.
+
+```cs
+var dbLogger = new LoggerFactory(new[]
+{
+    new ConsoleLoggerProvider((category, level)
+        => category == DbLoggerCategory.Database.Command.Name
+           && level == LogLevel.Information, true)
+});
+
+// ************************************sql server**********************************************
+// this is like if you had called the AddSqlServerDbContextFactory method.
+services.AddDbContextFactory<OrderContext>(builder => builder
+    .UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+    .UseLoggerFactory(dbLogger));
+
+// ************************************sqlite**************************************************
+services.AddDbContextFactory<OrderContext>(builder => builder
+    .UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
+    .UseLoggerFactory(dbLogger));
+
+// ************************************in memory***********************************************
+services.AddDbContextFactory<OrderContext>(builder => builder
+    .UseInMemoryDatabase("OrdersExample")
+    .UseLoggerFactory(dbLogger));
+``` 
+
 ## Contribution
 
 Your contributions are always welcome, feel free to improve or create new extensions for others dependency injection frameworks! All your work should be done in your forked repository. Once you finish your work, please send a pull request onto dev branch for review.
