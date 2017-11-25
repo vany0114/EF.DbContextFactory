@@ -18,12 +18,12 @@ With EF.DbContextFactory you can resolve easily your DbContext dependencies in a
 [![](https://img.shields.io/nuget/v/EF.DbContextFactory.StructureMap.WebApi.svg)](https://www.nuget.org/packages/EF.DbContextFactory.StructureMap.WebApi/)
 
 ## The Problem
-The Entity Framework DbContext has a well-known problem: it's not thread safe. So it means, you can't got an instance of the same entity class tracked by multiple contexts at the same time. For example, if you have a realtime, collaborative, concurrency or reactive application/scenario, using, for instance, SignalR or multiple threads in background (which are common characteristics in modern applications) I bet you have faced with this kind of exception: 
+The Entity Framework DbContext has a well-known problem: it’s not thread safe. So it means, you can’t get an instance of the same entity class tracked by multiple contexts at the same time. For example, if you have a realtime, collaborative, concurrency or reactive application/scenario, using, for instance, SignalR or multiple threads in background (which are common characteristics in modern applications). I bet you have faced this kind of exception:
 
 > ***"The context cannot be used while the model is being created. This exception may be thrown if the context is used inside the OnModelCreating method or if the same context instance is accessed by multiple threads concurrently. Note that instance members of DbContext and related classes are not guaranteed to be thread safe"***
 
 ## The Solutions
-There are multiple solutions to manage concurrency scenarios from data perspective, the most common patterns are *Pessimistic Concurrency (Locking)* and *Optimistic Concurrency*, actually Entity Framework has an implementation of [Optimistic Concurrency](https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application). So these solutions are implemented usually on the database side or even in both, backend and database sides, but the problem with DbContext is that's happening on memory, don't even in database. An approach what allows you to keep your code clean, follow good practices and keep on using Entity Framework and obvoiusly that works fine in multiple threads is injecting a factory in your repositories/unit of work (or whatever you're using it ~~code smell~~) insetead of the instance itself and use it and despose it as soon as possible.
+There are multiple solutions to manage concurrency scenarios from data perspective, the most common patterns are *Pessimistic Concurrency (Locking)* and *Optimistic Concurrency*, actually Entity Framework has an implementation of [Optimistic Concurrency](https://docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/handling-concurrency-with-the-entity-framework-in-an-asp-net-mvc-application). So these solutions are implemented usually on the database side or even in both, backend and database sides, but the problem with DbContext is that it is happening on memory, not even in the database. An approach that allows you to keep your code clean, follow good practices and keep on using Entity Framework and obviously works fine in multiple threads, is injecting a factory in your repositories/unit of work (or whatever you're using it ~~code smell~~) insetead of the instance itself and use it and dispose it as soon as possible.
 
 ## Key points
 * Dispose DbContext immediately.
@@ -34,7 +34,7 @@ There are multiple solutions to manage concurrency scenarios from data perspecti
 
 ## Getting Started
 
-EF.DbContextFactory provides you integration with most popular dependency injection frameworks such as [Unity](https://github.com/unitycontainer/unity), [Ninject](http://www.ninject.org/), [Structuremap](http://structuremap.github.io/) and [.Net Core](https://dotnet.github.io/). So there are for now five Nuget packages listed above that you can use like an extension to inject your DbContext as a factory.
+EF.DbContextFactory provides you integration with most popular dependency injection frameworks such as [Unity](https://github.com/unitycontainer/unity), [Ninject](http://www.ninject.org/), [Structuremap](http://structuremap.github.io/) and [.Net Core](https://dotnet.github.io/). So there five Nuget packages so far listed above that you can use like an extension to inject your DbContext as a factory.
 
 All of nuget packages add a generic extension method to the dependency injection framework container called `AddDbContextFactory`. It needs the derived DbContext Type and as an optional parameter, the name or the connection string itself. ***If you have the default one (DefaultConnection) in the configuration file, you dont need to specify it***
 
@@ -99,7 +99,7 @@ kernel.AddDbContextFactory<OrderContext>();
 ``` 
 
 ### StructureMap Asp.Net Mvc and Web Api
-If you are using StructureMap as DI container into your Asp.Net Mvc or Web Api project you must install [EF.DbContextFactory.StructureMap](https://www.nuget.org/packages/EF.DbContextFactory.StructureMap/) nuget package. After that, you are able to access to the extension method from the `Registry` object from StructureMap.
+If you are using StructureMap as DI container into your Asp.Net Mvc or Web Api project you must install [EF.DbContextFactory.StructureMap](https://www.nuget.org/packages/EF.DbContextFactory.StructureMap/) nuget package. After that, you are able to access the extension method from the `Registry` object from StructureMap.
 
 ```cs
 using EF.DbContextFactory.StructureMap.Extensions;
@@ -110,7 +110,7 @@ this.AddDbContextFactory<OrderContext>();
 ``` 
 
 ### StructureMap 4.1.0.361 Asp.Net Mvc and Web Api or WebApi.StructureMap
-If you are using StructureMap >= `4.1.0.361` as DI container or or WebApi.StructureMap for Web Api projects you must install [EF.DbContextFactory.StructureMap.WebApi](https://www.nuget.org/packages/EF.DbContextFactory.StructureMap.WebApi/) nuget package. After that, you are able to access to the extension method from the `Registry` object from StructureMap. (In my opinion this StructureMap version is is cleaner)
+If you are using StructureMap >= `4.1.0.361` as DI container or or WebApi.StructureMap for Web Api projects you must install [EF.DbContextFactory.StructureMap.WebApi](https://www.nuget.org/packages/EF.DbContextFactory.StructureMap.WebApi/) nuget package. After that, you are able to access the extension method from the `Registry` object from StructureMap. (In my opinion this StructureMap version is cleaner)
 
 ```cs
 using EF.DbContextFactory.StructureMap.WebApi.Extensions;
@@ -121,7 +121,7 @@ this.AddDbContextFactory<OrderContext>();
 ``` 
 
 ### Unity Asp.Net Mvc and Web Api
-If you are using Unity as DI container into your Asp.Net Mvc or Web Api project you must install [EF.DbContextFactory.Unity](https://www.nuget.org/packages/EF.DbContextFactory.Unity/) nuget package. After that, you are able to access to the extension method from the `UnityContainer` object from Unity.
+If you are using Unity as DI container into your Asp.Net Mvc or Web Api project you must install [EF.DbContextFactory.Unity](https://www.nuget.org/packages/EF.DbContextFactory.Unity/) nuget package. After that, you are able to access the extension method from the `UnityContainer` object from Unity.
 
 ```cs
 using EF.DbContextFactory.Unity.Extensions;
@@ -146,7 +146,7 @@ using EFCore.DbContextFactory.Extensions;
 services.AddSqlServerDbContextFactory<OrderContext>();
 ``` 
 
-Also you can use the known method `AddDbContextFactory` with the difference that it receives the `DbContextOptionsBuilder` object in order that you're able to build your DbContext as you need.
+Also you can use the known method `AddDbContextFactory` with the difference that it receives the `DbContextOptionsBuilder` object so you’re able to build your DbContext as you need.
 
 ```cs
 var dbLogger = new LoggerFactory(new[]
@@ -175,7 +175,7 @@ services.AddDbContextFactory<OrderContext>(builder => builder
 
 ## Examples
 
-You can find the examples in this repository and you can see the examples with Ninject, Structuremap, Structuremap.WebApi, Unity and Asp.Net Core, all you need is to run the migrations and that's it. Every example project has two controllers, one to receive a repository that implements the DbContextFactory and another one that doesn't and every one creates and deletes orders at the same time in different threads to simulate the concurrency. So you can see how the one that doesn't implement the DbContextFactory throws errors related to concurrency issues.
+You can find the examples in this repository and you can see the examples with Ninject, Structuremap, Structuremap.WebApi, Unity and Asp.Net Core, all you need is to run the migrations and that's it. Every example project has two controllers, one to receive a repository that implements the DbContextFactory and another one that doesn't, and every one creates and deletes orders at the same time in different threads to simulate the concurrency. So you can see how the one that doesn't implement the DbContextFactory throws errors related to concurrency issues.
 
 ![](example.gif)
 
