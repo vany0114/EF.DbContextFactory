@@ -3,12 +3,6 @@
 #exit if any command fails
 set -e
 
-artifactsFolder="./"
-
-if [ -d $artifactsFolder ]; then  
-  rm -R $artifactsFolder
-fi
-
 dotnet restore
 
 # Ideally we would use the 'dotnet test' command to test netcoreapp and net451 so restrict for now 
