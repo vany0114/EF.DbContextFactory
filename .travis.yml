@@ -1,8 +1,8 @@
 {
   "language": "csharp",
-  "solution": "EF.DbContextFactory",
+  "solution": "EF.DbContextFactory.sln",
   "script": [
-    "msbuild /p:Configuration=Release EF.DbContextFactory"
+    "msbuild /p:Configuration=Release EF.DbContextFactory.sln"
   ],
   "group": "stable",
   "dist": "trusty",
