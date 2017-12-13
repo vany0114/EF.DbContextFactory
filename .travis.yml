@@ -22,7 +22,5 @@ branches:
     - dev
 before_install:  
   - chmod +x build.sh
-install:  
-  - nuget restore EF.DbContextFactory.sln
 script:  
   - ./build.sh
