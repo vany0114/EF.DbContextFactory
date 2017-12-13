@@ -25,6 +25,3 @@ mono \
 
 revision=${TRAVIS_JOB_ID:=1}  
 revision=$(printf "%04d" $revision) 
-
-chmod +x ./build.sh  
-./build.sh
