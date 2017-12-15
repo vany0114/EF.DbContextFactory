@@ -112,6 +112,7 @@
       <Name>EF.DbContextFactory.Ninject</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="App_Data\EF.DbContextFactory.IntegrationTest.Ninject.ldf">
       <DependentUpon>EF.DbContextFactory.IntegrationTest.Ninject.mdf</DependentUpon>
