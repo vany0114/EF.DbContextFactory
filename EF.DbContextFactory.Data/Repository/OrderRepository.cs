@@ -43,5 +43,15 @@ namespace EF.DbContextFactory.Examples.Data.Repository
             _context.Entry(order).State = EntityState.Modified;
             return await _context.SaveChangesAsync();
         }
+
+        public void DeleteAll()
+        {
+            var orders = _context.Orders;
+            foreach (var order in orders)
+            {
+                _context.Entry(order).State = EntityState.Deleted;
+            }
+            _context.SaveChanges();
+        }
     }
 }

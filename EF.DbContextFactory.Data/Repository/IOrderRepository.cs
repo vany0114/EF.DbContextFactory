@@ -16,5 +16,7 @@ namespace EF.DbContextFactory.Examples.Data.Repository
         void DeleteById(Guid id);
 
         Task<int> Update(Order order);
+
+        void DeleteAll();
     }
 }
