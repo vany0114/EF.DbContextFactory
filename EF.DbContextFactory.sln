@@ -41,7 +41,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCore.DbContextFactory", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF.DbContextFactory.StructureMap.WebApi", "EF.DbContextFactory.StructureMap.WebApi\EF.DbContextFactory.StructureMap.WebApi.csproj", "{6F137A30-4D3E-425E-9D43-C680EE60B3DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF.DbContextFactory.IntegrationTest.Ninject", "EF.DbContextFactory.UnitTest.Ninject\EF.DbContextFactory.IntegrationTest.Ninject.csproj", "{F39F9EA8-E152-44B0-BB1D-CB46BF88B466}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF.DbContextFactory.IntegrationTest.Ninject", "EF.DbContextFactory.IntegrationTest.Ninject\EF.DbContextFactory.IntegrationTest.Ninject.csproj", "{F39F9EA8-E152-44B0-BB1D-CB46BF88B466}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

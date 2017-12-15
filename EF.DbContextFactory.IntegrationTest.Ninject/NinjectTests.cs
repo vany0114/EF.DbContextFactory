@@ -18,8 +18,8 @@ namespace EF.DbContextFactory.IntegrationTest.Ninject
         [ClassInitialize]
         public static void SetUp(TestContext context)
         {
-            string rootPath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
-            GrantAccess(Path.Combine(rootPath, "App_Data", "EF.DbContextFactory.UnitTest.Ninject.mdf"));
+            string rootPath = Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()));
+            GrantAccess(Path.Combine(rootPath, "App_Data", "EF.DbContextFactory.IntegrationTest.Ninject.mdf"));
             AppDomain.CurrentDomain.SetData(
                 "DataDirectory",
                 Path.Combine(rootPath, "App_Data"));
@@ -28,7 +28,7 @@ namespace EF.DbContextFactory.IntegrationTest.Ninject
         }
 
         [TestMethod]
-        public async Task Add_orders_without_EF_DbContextFactory()
+        public async Task Ninject_add_orders_without_EF_DbContextFactory()
         {
             ResetDataBase();
             var repo = NinjectWebCommon.Kernel.Get<OrderRepository>();
@@ -42,7 +42,7 @@ namespace EF.DbContextFactory.IntegrationTest.Ninject
         }
 
         [TestMethod]
-        public void Add_orders_with_EF_DbContextFactory()
+        public void Ninject_add_orders_with_EF_DbContextFactory()
         {
             ResetDataBase();
             var repo = NinjectWebCommon.Kernel.Get<OrderRepositoryWithFactory>();
@@ -57,7 +57,7 @@ namespace EF.DbContextFactory.IntegrationTest.Ninject
         }
 
         [TestMethod]
-        public async Task Delete_orders_with_EF_DbContextFactory()
+        public async Task Ninject_delete_orders_with_EF_DbContextFactory()
         {
             ResetDataBase();
             var repo = NinjectWebCommon.Kernel.Get<OrderRepositoryWithFactory>();
@@ -73,7 +73,7 @@ namespace EF.DbContextFactory.IntegrationTest.Ninject
         }
 
         [TestMethod]
-        public async Task Delete_orders_without_EF_DbContextFactory()
+        public async Task Ninject_delete_orders_without_EF_DbContextFactory()
         {
             ResetDataBase();
             var repo = NinjectWebCommon.Kernel.Get<OrderRepository>();

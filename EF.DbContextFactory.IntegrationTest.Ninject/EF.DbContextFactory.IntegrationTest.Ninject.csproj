@@ -113,15 +113,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\EF.DbContextFactory.UnitTest.Ninject.ldf">
-      <DependentUpon>EF.DbContextFactory.UnitTest.Ninject.mdf</DependentUpon>
+    <Content Include="App_Data\EF.DbContextFactory.IntegrationTest.Ninject.ldf">
+      <DependentUpon>EF.DbContextFactory.IntegrationTest.Ninject.mdf</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\EF.DbContextFactory.UnitTest.Ninject.mdf">
+    <Content Include="App_Data\EF.DbContextFactory.IntegrationTest.Ninject.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\EF.DbContextFactory.UnitTest.Ninject_log.ldf">
-      <DependentUpon>EF.DbContextFactory.UnitTest.Ninject.mdf</DependentUpon>
+    <Content Include="App_Data\EF.DbContextFactory.IntegrationTest.Ninject_log.ldf">
+      <DependentUpon>EF.DbContextFactory.IntegrationTest.Ninject.mdf</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
