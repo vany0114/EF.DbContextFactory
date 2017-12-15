@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.Core;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using EF.DbContextFactory.Examples.Data.Entity;
 using EF.DbContextFactory.Examples.Data.Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ninject;
@@ -17,6 +19,7 @@ namespace EF.DbContextFactory.IntegrationTest.Ninject
         public static void SetUp(TestContext context)
         {
             string rootPath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
+            GrantAccess(Path.Combine(rootPath, "App_Data", "EF.DbContextFactory.UnitTest.Ninject.mdf"));
             AppDomain.CurrentDomain.SetData(
                 "DataDirectory",
                 Path.Combine(rootPath, "App_Data"));
@@ -33,7 +36,8 @@ namespace EF.DbContextFactory.IntegrationTest.Ninject
 
             await Assert.ThrowsExceptionAsync<InvalidOperationException>(async () =>
             {
-                await orderManager.Create(out var orders);
+                var orders = new List<Order>();
+                await orderManager.Create(out orders);
             });
         }
 
@@ -44,7 +48,8 @@ namespace EF.DbContextFactory.IntegrationTest.Ninject
             var repo = NinjectWebCommon.Kernel.Get<OrderRepositoryWithFactory>();
             var orderManager = new OrderManager(repo);
 
-            var task = orderManager.Create(out var orders);
+            var orders = new List<Order>();
+            var task = orderManager.Create(out orders);
             task.Wait();
 
             Assert.AreEqual(TaskStatus.RanToCompletion, task.Status);
@@ -58,7 +63,8 @@ namespace EF.DbContextFactory.IntegrationTest.Ninject
             var repo = NinjectWebCommon.Kernel.Get<OrderRepositoryWithFactory>();
             var orderManager = new OrderManager(repo);
 
-            await orderManager.Create(out var orders);
+            var orders = new List<Order>();
+            await orderManager.Create(out orders);
             var task = orderManager.Delete(orders);
             task.Wait();
 
@@ -75,7 +81,8 @@ namespace EF.DbContextFactory.IntegrationTest.Ninject
             var orderManager = new OrderManager(repo);
             var orderManagerWithFactory = new OrderManager(repoWithFactory);
 
-            await orderManagerWithFactory.Create(out var orders);
+            var orders = new List<Order>();
+            await orderManagerWithFactory.Create(out orders);
             await Assert.ThrowsExceptionAsync<EntityCommandExecutionException>(async () =>
             {
                 await orderManager.Delete(orders);
@@ -86,6 +93,16 @@ namespace EF.DbContextFactory.IntegrationTest.Ninject
         {
             var repo = NinjectWebCommon.Kernel.Get<OrderRepository>();
             repo.DeleteAll();
+        }
+
+        /// <summary>
+        /// In order to give write acces because on CI all files are readonly.
+        /// </summary>
+        /// <param name="fullPath">Database path.</param>
+        private static void GrantAccess(string fullPath)
+        {
+            FileInfo fileInfo = new FileInfo(fullPath);
+            fileInfo.IsReadOnly = false;
         }
     }
 }
