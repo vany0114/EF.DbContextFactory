@@ -18,12 +18,6 @@ namespace EF.DbContextFactory.IntegrationTest.Ninject
         [ClassInitialize]
         public static void SetUp(TestContext context)
         {
-            string rootPath = Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()));
-            GrantAccess(Path.Combine(rootPath, "App_Data", "EF.DbContextFactory.IntegrationTest.Ninject.mdf"));
-            AppDomain.CurrentDomain.SetData(
-                "DataDirectory",
-                Path.Combine(rootPath, "App_Data"));
-
             NinjectWebCommon.Start();
         }
 
@@ -34,10 +28,17 @@ namespace EF.DbContextFactory.IntegrationTest.Ninject
             var repo = NinjectWebCommon.Kernel.Get<OrderRepository>();
             var orderManager = new OrderManager(repo);
 
-            await Assert.ThrowsExceptionAsync<InvalidOperationException>(async () =>
+            await Assert.ThrowsExceptionAsync<EntityException>(async () =>
             {
-                var orders = new List<Order>();
-                await orderManager.Create(out orders);
+                try
+                {
+                    var orders = new List<Order>();
+                    await orderManager.Create(out orders);
+                }
+                catch(Exception ex)
+                {
+                    throw new EntityException("Entity framework thread safe exception", ex);
+                }
             });
         }
 
@@ -83,9 +84,16 @@ namespace EF.DbContextFactory.IntegrationTest.Ninject
 
             var orders = new List<Order>();
             await orderManagerWithFactory.Create(out orders);
-            await Assert.ThrowsExceptionAsync<EntityCommandExecutionException>(async () =>
+            await Assert.ThrowsExceptionAsync<EntityException>(async () =>
             {
-                await orderManager.Delete(orders);
+                try
+                {
+                    await orderManager.Delete(orders);
+                }
+                catch (Exception ex)
+                {
+                    throw new EntityException("Entity framework thread safe exception", ex);
+                }
             });
         }
 
@@ -93,16 +101,6 @@ namespace EF.DbContextFactory.IntegrationTest.Ninject
         {
             var repo = NinjectWebCommon.Kernel.Get<OrderRepository>();
             repo.DeleteAll();
-        }
-
-        /// <summary>
-        /// In order to give write acces because on CI all files are readonly.
-        /// </summary>
-        /// <param name="fullPath">Database path.</param>
-        private static void GrantAccess(string fullPath)
-        {
-            FileInfo fileInfo = new FileInfo(fullPath);
-            fileInfo.IsReadOnly = false;
         }
     }
 }

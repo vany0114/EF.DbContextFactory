@@ -153,6 +153,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\EF.DbContextFactory.Examples.Data.Persistence.OrderContext.mdf" />
+    <Content Include="App_Data\EF.DbContextFactory.Examples.Data.Persistence.OrderContext_log.ldf">
+      <DependentUpon>EF.DbContextFactory.Examples.Data.Persistence.OrderContext.mdf</DependentUpon>
+    </Content>
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -186,9 +190,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\EF.DbContextFactory.Data\EF.DbContextFactory.Examples.Data.csproj">
       <Project>{fcd8d62d-2699-4601-a29a-e144db466319}</Project>
