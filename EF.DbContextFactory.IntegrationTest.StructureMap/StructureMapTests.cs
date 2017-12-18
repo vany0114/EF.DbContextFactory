@@ -24,7 +24,6 @@ namespace EF.DbContextFactory.IntegrationTest.StructureMap
         [TestMethod]
         public async Task StructureMap_add_orders_without_EF_DbContextFactory()
         {
-            ResetDataBase();
             var repo = ObjectFactory.GetInstance<OrderRepository>();
             var orderManager = new OrderManager(repo);
 
@@ -40,8 +39,6 @@ namespace EF.DbContextFactory.IntegrationTest.StructureMap
                     throw new EntityException("Entity framework thread safe exception", ex);
                 }
             });
-
-            
         }
 
         [TestMethod]
