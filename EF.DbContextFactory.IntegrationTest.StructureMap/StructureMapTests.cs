@@ -40,6 +40,8 @@ namespace EF.DbContextFactory.IntegrationTest.StructureMap
                     throw new EntityException("Entity framework thread safe exception", ex);
                 }
             });
+
+            Assert.AreEqual(1, repo.GetAllOrders().Count());
         }
 
         [TestMethod]
