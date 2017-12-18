@@ -34,6 +34,7 @@ namespace EF.DbContextFactory.IntegrationTest.StructureMap
                 {
                     var orders = new List<Order>();
                     await orderManager.Create(out orders);
+                    Assert.AreEqual(1, repo.GetAllOrders().Count());
                 }
                 catch (Exception ex)
                 {
@@ -41,7 +42,7 @@ namespace EF.DbContextFactory.IntegrationTest.StructureMap
                 }
             });
 
-            Assert.AreEqual(1, repo.GetAllOrders().Count());
+            
         }
 
         [TestMethod]

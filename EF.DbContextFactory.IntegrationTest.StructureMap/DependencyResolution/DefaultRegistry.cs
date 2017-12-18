@@ -30,8 +30,8 @@ namespace EF.DbContextFactory.IntegrationTest.StructureMap.DependencyResolution 
         public DefaultRegistry() {
 
             // without DbContextFactory
-            For<DbContext>().Use<OrderContext>().Transient();
-            For<IOrderRepository>().Use<OrderRepository>().LifecycleIs<HttpContextLifecycle>();
+            For<DbContext>().Use<OrderContext>();
+            For<IOrderRepository>().Use<OrderRepository>();
 
             // with DbContextFactory
             this.AddDbContextFactory<OrderContext>();
