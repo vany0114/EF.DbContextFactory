@@ -59,17 +59,17 @@ namespace EF.DbContextFactory.IntegrationTest.StructureMap
                 }
             };
 
-            var task1 = Task.Factory.StartNew(() =>
+            var task1 = Task.Run(() =>
             {
                 _orderRepository.Add(newOrder2);
             });
 
-            var task2 = Task.Factory.StartNew(() =>
+            var task2 = Task.Run(() =>
             {
                 _orderRepository.Add(newOrder3);
             });
 
-            var task3 = Task.Factory.StartNew(() =>
+            var task3 = Task.Run(() =>
             {
                 _orderRepository.Add(newOrder1);
             });
@@ -83,7 +83,7 @@ namespace EF.DbContextFactory.IntegrationTest.StructureMap
             var tasks = new List<Task>();
             foreach (var order in orders)
             {
-                tasks.Add(Task.Factory.StartNew(() =>
+                tasks.Add(Task.Run(() =>
                 {
                     _orderRepository.DeleteById(order.Id);
                 }));
