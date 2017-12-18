@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF.DbContextFactory.Structu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF.DbContextFactory.IntegrationTest.Ninject", "EF.DbContextFactory.IntegrationTest.Ninject\EF.DbContextFactory.IntegrationTest.Ninject.csproj", "{F39F9EA8-E152-44B0-BB1D-CB46BF88B466}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF.DbContextFactory.IntegrationTest.StructureMap", "EF.DbContextFactory.IntegrationTest.StructureMap\EF.DbContextFactory.IntegrationTest.StructureMap.csproj", "{3B8FF532-B456-4B59-825D-B39AB5A67EC9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +119,10 @@ Global
 		{F39F9EA8-E152-44B0-BB1D-CB46BF88B466}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F39F9EA8-E152-44B0-BB1D-CB46BF88B466}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F39F9EA8-E152-44B0-BB1D-CB46BF88B466}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B8FF532-B456-4B59-825D-B39AB5A67EC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B8FF532-B456-4B59-825D-B39AB5A67EC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B8FF532-B456-4B59-825D-B39AB5A67EC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B8FF532-B456-4B59-825D-B39AB5A67EC9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -139,6 +145,7 @@ Global
 		{B7B427DD-38A0-4A41-8C7B-8542A1583707} = {4B227D6C-0E47-4A5E-AA1E-DB9911ECAE77}
 		{6F137A30-4D3E-425E-9D43-C680EE60B3DD} = {4B227D6C-0E47-4A5E-AA1E-DB9911ECAE77}
 		{F39F9EA8-E152-44B0-BB1D-CB46BF88B466} = {9F22B7C5-2A6D-42BC-8576-7915F9B1DEB2}
+		{3B8FF532-B456-4B59-825D-B39AB5A67EC9} = {9F22B7C5-2A6D-42BC-8576-7915F9B1DEB2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5EABDFD2-D616-40CD-BDC7-C38187FF1141}
