@@ -23,7 +23,6 @@ namespace EF.DbContextFactory.IntegrationTest.Unity
         [TestMethod]
         public async Task Unity_add_orders_without_EF_DbContextFactory()
         {
-            ResetDataBase();
             var repo = UnityConfig.Container.Resolve<OrderRepository>();
             var orderManager = new OrderManager(repo);
 

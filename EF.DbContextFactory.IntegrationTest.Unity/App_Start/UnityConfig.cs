@@ -43,7 +43,7 @@ namespace EF.DbContextFactory.IntegrationTest.Unity
         {
             // without DbContextFactory
             container.RegisterType<DbContext, OrderContext>(new TransientLifetimeManager());
-            container.RegisterType<IOrderRepository, OrderRepository>();
+            container.RegisterType<IOrderRepository, OrderRepository>(new TransientLifetimeManager());
 
             // with DbContextFactory
             container.AddDbContextFactory<OrderContext>();
