@@ -81,7 +81,7 @@ namespace EF.DbContextFactory.IntegrationTest.StructureMap
             ResetDataBase();
             var container = new Container();
             var repo = container.GetInstance<OrderRepository>();
-            var repoWithFactory = ObjectFactory.GetInstance<OrderRepositoryWithFactory>();
+            var repoWithFactory = container.GetInstance<OrderRepositoryWithFactory>();
             var orderManager = new OrderManager(repo);
             var orderManagerWithFactory = new OrderManager(repoWithFactory);
 
@@ -102,7 +102,8 @@ namespace EF.DbContextFactory.IntegrationTest.StructureMap
 
         private static void ResetDataBase()
         {
-            var repo = ObjectFactory.GetInstance<OrderRepository>();
+            var container = new Container();
+            var repo = container.GetInstance<OrderRepository>();
             repo.DeleteAll();
         }
     }
