@@ -11,6 +11,7 @@ using NSubstitute;
 
 namespace EF.DbContextFactory.UnitTest.Data
 {
+    [TestCategory("Factory")]
     [TestClass]    
     public class OrderRepositoryTest
     {
