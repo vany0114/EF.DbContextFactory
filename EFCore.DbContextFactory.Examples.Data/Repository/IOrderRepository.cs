@@ -16,5 +16,7 @@ namespace EFCore.DbContextFactory.Examples.Data.Repository
         void DeleteById(Guid id);
 
         Task Update(Order order);
+
+        void DeleteAll();
     }
 }
