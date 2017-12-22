@@ -75,7 +75,8 @@ namespace EFCore.DbContextFactory.IntegrationTest
             });
 
             orders = new List<Order> { newOrder1, newOrder2, newOrder3 };
-            return Task.WhenAll(task1, task2, task3);
+            Task.WaitAll(task1, task2, task3);
+            return Task.FromResult(0);
         }
 
         public Task Delete(List<Order> orders)
