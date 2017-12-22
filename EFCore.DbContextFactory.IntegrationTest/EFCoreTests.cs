@@ -28,17 +28,10 @@ namespace EFCore.DbContextFactory.IntegrationTest
             var orderManager = new OrderManager(repo);
             ResetDataBase(repo);
 
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Assert.ThrowsAnyAsync<Exception>(async () =>
             {
-                try
-                {
-                    var orders = new List<Order>();
-                    await orderManager.Create(out orders);
-                }
-                catch (Exception ex)
-                {
-                    throw new InvalidOperationException("Entity framework thread safe exception", ex);
-                }
+                var orders = new List<Order>();
+                await orderManager.Create(out orders);
             });
         }
 
@@ -84,16 +77,9 @@ namespace EFCore.DbContextFactory.IntegrationTest
 
             var orders = new List<Order>();
             await orderManagerWithFactory.Create(out orders);
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Assert.ThrowsAnyAsync<Exception>(async () =>
             {
-                try
-                {
-                    await orderManager.Delete(orders);
-                }
-                catch (Exception ex)
-                {
-                    throw new InvalidOperationException("Entity framework thread safe exception", ex);
-                }
+                await orderManager.Delete(orders);
             });
         }
 

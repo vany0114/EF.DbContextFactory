@@ -1,7 +1,9 @@
 ﻿using EFCore.DbContextFactory.Examples.Data.Entity;
 using EFCore.DbContextFactory.Examples.Data.Repository;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -58,25 +60,24 @@ namespace EFCore.DbContextFactory.IntegrationTest
                     new OrderItem {Id = Guid.NewGuid(), Name = "Item 2", Quantity = 4, UnitPrice = 5000}
                 }
             };
-
+            
             var task1 = Task.Factory.StartNew(() =>
             {
                 _orderRepository.Add(newOrder2);
-            });
+            }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.FromCurrentSynchronizationContext());
 
             var task2 = Task.Factory.StartNew(() =>
             {
                 _orderRepository.Add(newOrder3);
-            });
+            }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.FromCurrentSynchronizationContext());
 
             var task3 = Task.Factory.StartNew(() =>
             {
                 _orderRepository.Add(newOrder1);
-            });
+            }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.FromCurrentSynchronizationContext());
 
             orders = new List<Order> { newOrder1, newOrder2, newOrder3 };
-            Task.WaitAll(task1, task2, task3);
-            return Task.FromResult(0);
+            return Task.WhenAll(task1, task2, task3);
         }
 
         public Task Delete(List<Order> orders)
