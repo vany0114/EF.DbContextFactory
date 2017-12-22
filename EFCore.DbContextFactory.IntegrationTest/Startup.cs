@@ -32,9 +32,10 @@ namespace EFCore.DbContextFactory.IntegrationTest
             services.AddMvc();
 
             services.AddDbContext<OrderContext>(builder =>
-                builder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                builder.UseInMemoryDatabase("OrdersExample"));
             
-            services.AddSqlServerDbContextFactory<OrderContext>();
+            services.AddDbContextFactory<OrderContext>(builder => builder
+                .UseInMemoryDatabase("OrdersExample"));
 
             services.AddScoped<OrderRepositoryWithFactory, OrderRepositoryWithFactory>();
             services.AddScoped<OrderRepository, OrderRepository>();

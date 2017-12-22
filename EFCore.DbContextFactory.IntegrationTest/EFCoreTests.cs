@@ -2,7 +2,6 @@ using EFCore.DbContextFactory.Examples.Data.Entity;
 using EFCore.DbContextFactory.Examples.Data.Repository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +18,6 @@ namespace EFCore.DbContextFactory.IntegrationTest
         public EFCoreTests()
         {
             _server = new TestServer(new WebHostBuilder()
-                .UseConfiguration(new ConfigurationBuilder()
-                    .SetBasePath(AppContext.BaseDirectory.Substring(0, AppContext.BaseDirectory.IndexOf("bin")))
-                    .AddJsonFile("appsettings.json")
-                    .Build()
-                )
                 .UseStartup<Startup>());
         }
 
@@ -32,6 +26,7 @@ namespace EFCore.DbContextFactory.IntegrationTest
         {
             var repo = (OrderRepository)_server.Host.Services.GetService(typeof(OrderRepository));
             var orderManager = new OrderManager(repo);
+            ResetDataBase(repo);
 
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
             {
@@ -50,9 +45,9 @@ namespace EFCore.DbContextFactory.IntegrationTest
         [Fact(DisplayName = "EFCore_add_orders_with_EF_DbContextFactory")]
         public void EFCore_add_orders_with_EF_DbContextFactory()
         {
-            ResetDataBase();
             var repo = (OrderRepositoryWithFactory)_server.Host.Services.GetService(typeof(OrderRepositoryWithFactory));
             var orderManager = new OrderManager(repo);
+            ResetDataBase(repo);
 
             var orders = new List<Order>();
             var task = orderManager.Create(out orders);
@@ -65,9 +60,9 @@ namespace EFCore.DbContextFactory.IntegrationTest
         [Fact(DisplayName = "EFCore_delete_orders_with_EF_DbContextFactory")]
         public async Task EFCore_delete_orders_with_EF_DbContextFactory()
         {
-            ResetDataBase();
             var repo = (OrderRepositoryWithFactory)_server.Host.Services.GetService(typeof(OrderRepositoryWithFactory));
             var orderManager = new OrderManager(repo);
+            ResetDataBase(repo);
 
             var orders = new List<Order>();
             await orderManager.Create(out orders);
@@ -81,11 +76,11 @@ namespace EFCore.DbContextFactory.IntegrationTest
         [Fact(DisplayName = "EFCore_delete_orders_without_EF_DbContextFactory")]
         public async Task EFCore_delete_orders_without_EF_DbContextFactory()
         {
-            ResetDataBase();
             var repo = (OrderRepository)_server.Host.Services.GetService(typeof(OrderRepository));
             var repoWithFactory = (OrderRepositoryWithFactory)_server.Host.Services.GetService(typeof(OrderRepositoryWithFactory));
             var orderManager = new OrderManager(repo);
             var orderManagerWithFactory = new OrderManager(repoWithFactory);
+            ResetDataBase(repo);
 
             var orders = new List<Order>();
             await orderManagerWithFactory.Create(out orders);
@@ -102,9 +97,8 @@ namespace EFCore.DbContextFactory.IntegrationTest
             });
         }
 
-        private void ResetDataBase()
+        private void ResetDataBase(IOrderRepository repo)
         {
-            var repo = (OrderRepositoryWithFactory)_server.Host.Services.GetService(typeof(OrderRepositoryWithFactory));
             repo.DeleteAll();
         }
     }
