@@ -2,6 +2,7 @@ using EFCore.DbContextFactory.Examples.Data.Entity;
 using EFCore.DbContextFactory.Examples.Data.Repository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,11 @@ namespace EFCore.DbContextFactory.IntegrationTest
         public EFCoreTests()
         {
             _server = new TestServer(new WebHostBuilder()
+                .UseConfiguration(new ConfigurationBuilder()
+                    .SetBasePath(AppContext.BaseDirectory.Substring(0, AppContext.BaseDirectory.IndexOf("bin")))
+                    .AddJsonFile("appsettings.json")
+                    .Build()
+                )
                 .UseStartup<Startup>());
         }
 
