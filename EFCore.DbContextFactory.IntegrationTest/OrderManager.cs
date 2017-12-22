@@ -62,17 +62,17 @@ namespace EFCore.DbContextFactory.IntegrationTest
             var task1 = Task.Factory.StartNew(() =>
             {
                 _orderRepository.Add(newOrder2);
-            });
+            }, TaskCreationOptions.LongRunning);
 
             var task2 = Task.Factory.StartNew(() =>
             {
                 _orderRepository.Add(newOrder3);
-            });
+            }, TaskCreationOptions.LongRunning);
 
             var task3 = Task.Factory.StartNew(() =>
             {
                 _orderRepository.Add(newOrder1);
-            });
+            }, TaskCreationOptions.LongRunning);
 
             orders = new List<Order> { newOrder1, newOrder2, newOrder3 };
             return Task.WhenAll(task1, task2, task3);

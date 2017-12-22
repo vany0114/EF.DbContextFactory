@@ -39,7 +39,7 @@ namespace EFCore.DbContextFactory.IntegrationTest
             });
 
             services.AddDbContext<OrderContext>(builder =>
-                builder.UseInMemoryDatabase("OrdersExample"), ServiceLifetime.Transient);
+                builder.UseInMemoryDatabase("OrdersExample"));
             
             services.AddDbContextFactory<OrderContext>(builder => builder
                 .UseInMemoryDatabase("OrdersExample")
