@@ -31,19 +31,11 @@ namespace EFCore.DbContextFactory.IntegrationTest
         {
             services.AddMvc();
 
-            var dbLogger = new LoggerFactory(new[]
-            {
-                new ConsoleLoggerProvider((category, level)
-                    => category == DbLoggerCategory.Database.Command.Name
-                       && level == LogLevel.Information, true)
-            });
-
             services.AddDbContext<OrderContext>(builder =>
                 builder.UseInMemoryDatabase("OrdersExample"));
             
             services.AddDbContextFactory<OrderContext>(builder => builder
-                .UseInMemoryDatabase("OrdersExample")
-                .UseLoggerFactory(dbLogger));
+                .UseInMemoryDatabase("OrdersExample"));
 
             services.AddScoped<OrderRepositoryWithFactory, OrderRepositoryWithFactory>();
             services.AddScoped<OrderRepository, OrderRepository>();

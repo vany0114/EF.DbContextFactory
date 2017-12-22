@@ -24,7 +24,6 @@ namespace EFCore.DbContextFactory.IntegrationTest
         [Fact(DisplayName ="EFCore_add_orders_without_EF_DbContextFactory")]
         public async Task EFCore_add_orders_without_EF_DbContextFactory()
         {
-            ResetDataBase();
             var repo = (OrderRepository)_server.Host.Services.GetService(typeof(OrderRepository));
             var orderManager = new OrderManager(repo);
 
