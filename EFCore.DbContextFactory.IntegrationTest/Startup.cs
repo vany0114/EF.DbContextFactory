@@ -45,8 +45,8 @@ namespace EFCore.DbContextFactory.IntegrationTest
                 .UseInMemoryDatabase("OrdersExample")
                 .UseLoggerFactory(dbLogger));
 
-            services.AddTransient<OrderRepositoryWithFactory, OrderRepositoryWithFactory>();
-            services.AddTransient<OrderRepository, OrderRepository>();
+            services.AddScoped<OrderRepositoryWithFactory, OrderRepositoryWithFactory>();
+            services.AddScoped<OrderRepository, OrderRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
