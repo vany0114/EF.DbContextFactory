@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using EFCore.DbContextFactory.Examples.Data.Persistence;
+﻿using EFCore.DbContextFactory.Examples.Data.Persistence;
 using EFCore.DbContextFactory.Examples.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
-using Microsoft.Extensions.Logging.Console;
-using Microsoft.Extensions.Options;
 using EFCore.DbContextFactory.Extensions;
 
 namespace EFCore.DbContextFactory.IntegrationTest
@@ -38,7 +30,7 @@ namespace EFCore.DbContextFactory.IntegrationTest
                 .UseInMemoryDatabase("OrdersExample"));
 
             services.AddScoped<OrderRepositoryWithFactory, OrderRepositoryWithFactory>();
-            services.AddScoped<OrderRepository, OrderRepository>();
+            services.AddTransient<OrderRepository, OrderRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

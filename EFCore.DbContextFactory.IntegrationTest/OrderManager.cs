@@ -59,17 +59,17 @@ namespace EFCore.DbContextFactory.IntegrationTest
                 }
             };
 
-            var task1 = Task.Run(() =>
+            var task1 = Task.Factory.StartNew(() =>
             {
                 _orderRepository.Add(newOrder2);
             });
 
-            var task2 = Task.Run(() =>
+            var task2 = Task.Factory.StartNew(() =>
             {
                 _orderRepository.Add(newOrder3);
             });
 
-            var task3 = Task.Run(() =>
+            var task3 = Task.Factory.StartNew(() =>
             {
                 _orderRepository.Add(newOrder1);
             });
