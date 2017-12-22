@@ -98,7 +98,7 @@ namespace EFCore.DbContextFactory.IntegrationTest
 
         private void ResetDataBase()
         {
-            var repo = (OrderRepository)_server.Host.Services.GetService(typeof(OrderRepository));
+            var repo = (OrderRepositoryWithFactory)_server.Host.Services.GetService(typeof(OrderRepositoryWithFactory));
             repo.DeleteAll();
         }
     }
