@@ -168,6 +168,9 @@ services.AddDbContextFactory<OrderContext>(builder => builder
     .UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
     .UseLoggerFactory(dbLogger));
 
+services.AddDbContextFactory<OrderContext>((provider, builder) => builder
+    .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            
 // ************************************sqlite**************************************************
 services.AddDbContextFactory<OrderContext>(builder => builder
     .UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
