@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using EFCore.DbContextFactory.Examples.Data.Persistence;
+﻿using EFCore.DbContextFactory.Examples.Data.Persistence;
 using EFCore.DbContextFactory.Examples.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,9 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Logging.Console;
-using Microsoft.Extensions.Options;
 using EFCore.DbContextFactory.Extensions;
 
 namespace EFCore.DbContextFactory.Examples.WebApi
@@ -52,6 +46,9 @@ namespace EFCore.DbContextFactory.Examples.WebApi
             //services.AddDbContextFactory<OrderContext>(builder => builder
             //    .UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             //    .UseLoggerFactory(dbLogger));
+
+            //services.AddDbContextFactory<OrderContext>((provider, builder) => builder
+            //    .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             // ************************************sqlite**************************************************
             //services.AddDbContextFactory<OrderContext>(builder => builder

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27130.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF.DbContextFactory.Examples.NInject", "EF.DbContextFactory.Examples.NInject\EF.DbContextFactory.Examples.NInject.csproj", "{548A038D-51F1-49A6-9351-14576EBB2527}"
 EndProject
@@ -40,6 +40,16 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCore.DbContextFactory", "EFCore.DbContextFactory\EFCore.DbContextFactory.csproj", "{B7B427DD-38A0-4A41-8C7B-8542A1583707}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF.DbContextFactory.StructureMap.WebApi", "EF.DbContextFactory.StructureMap.WebApi\EF.DbContextFactory.StructureMap.WebApi.csproj", "{6F137A30-4D3E-425E-9D43-C680EE60B3DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF.DbContextFactory.IntegrationTest.Ninject", "EF.DbContextFactory.IntegrationTest.Ninject\EF.DbContextFactory.IntegrationTest.Ninject.csproj", "{F39F9EA8-E152-44B0-BB1D-CB46BF88B466}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF.DbContextFactory.IntegrationTest.StructureMap", "EF.DbContextFactory.IntegrationTest.StructureMap\EF.DbContextFactory.IntegrationTest.StructureMap.csproj", "{3B8FF532-B456-4B59-825D-B39AB5A67EC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF.DbContextFactory.IntegrationTest.StructureMap41.WebApi", "EF.DbContextFactory.IntegrationTest.StructureMap41.WebApi\EF.DbContextFactory.IntegrationTest.StructureMap41.WebApi.csproj", "{CD2A7DDD-2713-4760-AEBF-278D315FE311}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF.DbContextFactory.IntegrationTest.Unity", "EF.DbContextFactory.IntegrationTest.Unity\EF.DbContextFactory.IntegrationTest.Unity.csproj", "{66050720-F426-478C-98EC-28AB0D3D6966}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore.DbContextFactory.IntegrationTest", "EFCore.DbContextFactory.IntegrationTest\EFCore.DbContextFactory.IntegrationTest.csproj", "{BF6E882D-32C9-459E-90C9-B8A9B6C33181}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,6 +121,26 @@ Global
 		{6F137A30-4D3E-425E-9D43-C680EE60B3DD}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{6F137A30-4D3E-425E-9D43-C680EE60B3DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F137A30-4D3E-425E-9D43-C680EE60B3DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F39F9EA8-E152-44B0-BB1D-CB46BF88B466}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F39F9EA8-E152-44B0-BB1D-CB46BF88B466}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F39F9EA8-E152-44B0-BB1D-CB46BF88B466}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F39F9EA8-E152-44B0-BB1D-CB46BF88B466}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B8FF532-B456-4B59-825D-B39AB5A67EC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B8FF532-B456-4B59-825D-B39AB5A67EC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B8FF532-B456-4B59-825D-B39AB5A67EC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B8FF532-B456-4B59-825D-B39AB5A67EC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD2A7DDD-2713-4760-AEBF-278D315FE311}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD2A7DDD-2713-4760-AEBF-278D315FE311}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD2A7DDD-2713-4760-AEBF-278D315FE311}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD2A7DDD-2713-4760-AEBF-278D315FE311}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66050720-F426-478C-98EC-28AB0D3D6966}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66050720-F426-478C-98EC-28AB0D3D6966}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66050720-F426-478C-98EC-28AB0D3D6966}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66050720-F426-478C-98EC-28AB0D3D6966}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF6E882D-32C9-459E-90C9-B8A9B6C33181}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF6E882D-32C9-459E-90C9-B8A9B6C33181}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF6E882D-32C9-459E-90C9-B8A9B6C33181}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF6E882D-32C9-459E-90C9-B8A9B6C33181}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -132,6 +162,11 @@ Global
 		{F1C643C7-5507-49B4-95BE-3AD9622011D1} = {4B227D6C-0E47-4A5E-AA1E-DB9911ECAE77}
 		{B7B427DD-38A0-4A41-8C7B-8542A1583707} = {4B227D6C-0E47-4A5E-AA1E-DB9911ECAE77}
 		{6F137A30-4D3E-425E-9D43-C680EE60B3DD} = {4B227D6C-0E47-4A5E-AA1E-DB9911ECAE77}
+		{F39F9EA8-E152-44B0-BB1D-CB46BF88B466} = {9F22B7C5-2A6D-42BC-8576-7915F9B1DEB2}
+		{3B8FF532-B456-4B59-825D-B39AB5A67EC9} = {9F22B7C5-2A6D-42BC-8576-7915F9B1DEB2}
+		{CD2A7DDD-2713-4760-AEBF-278D315FE311} = {9F22B7C5-2A6D-42BC-8576-7915F9B1DEB2}
+		{66050720-F426-478C-98EC-28AB0D3D6966} = {9F22B7C5-2A6D-42BC-8576-7915F9B1DEB2}
+		{BF6E882D-32C9-459E-90C9-B8A9B6C33181} = {9F22B7C5-2A6D-42BC-8576-7915F9B1DEB2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5EABDFD2-D616-40CD-BDC7-C38187FF1141}
