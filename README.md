@@ -22,6 +22,9 @@ With EF.DbContextFactory you can resolve easily your DbContext dependencies in a
 * [EF.DbContextFactory.StructureMap.WebApi](#structuremap-410361-aspnet-mvc-and-web-api-or-webapistructuremap)
 [![](https://img.shields.io/nuget/v/EF.DbContextFactory.StructureMap.WebApi.svg)](https://www.nuget.org/packages/EF.DbContextFactory.StructureMap.WebApi/)
 [![NuGet](https://img.shields.io/nuget/dt/EF.DbContextFactory.StructureMap.WebApi.svg)](https://www.nuget.org/packages/EF.DbContextFactory.StructureMap.WebApi/)
+* [EF.DbContextFactory.SimpleInjector](#simpleinjector-aspnet-mvc-and-web-api)
+[![](https://img.shields.io/nuget/v/EF.DbContextFactory.SimpleInjector.svg)](https://www.nuget.org/packages/EF.DbContextFactory.SimpleInjector/)
+[![NuGet](https://img.shields.io/nuget/dt/EF.DbContextFactory.SimpleInjector.svg)](https://www.nuget.org/packages/EF.DbContextFactory.SimpleInjector/)
 
 ## The Problem
 The Entity Framework DbContext has a well-known problem: it’s not thread safe. So it means, you can’t get an instance of the same entity class tracked by multiple contexts at the same time. For example, if you have a realtime, collaborative, concurrency or reactive application/scenario, using, for instance, SignalR or multiple threads in background (which are common characteristics in modern applications). I bet you have faced this kind of exception:

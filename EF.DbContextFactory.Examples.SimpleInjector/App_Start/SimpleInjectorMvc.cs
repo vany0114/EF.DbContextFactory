@@ -19,8 +19,8 @@ namespace EF.DbContextFactory.Examples.SimpleInjector
             container.Register<OrderContext>(Lifestyle.Scoped);
             container.AddDbContextFactory<OrderContext>();
 
-            container.Register<OrderRepository>();
-            container.Register<OrderRepositoryWithFactory>();
+            container.Register<OrderRepository>(Lifestyle.Scoped);
+            container.Register<OrderRepositoryWithFactory>(Lifestyle.Scoped);
 
             container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
 
