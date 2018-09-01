@@ -55,6 +55,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF.DbContextFactory.SimpleI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF.DbContextFactory.IntegrationTest.SimpleInjector", "EF.DbContextFactory.IntegrationTest.SimpleInjector\EF.DbContextFactory.IntegrationTest.SimpleInjector.csproj", "{55327DAB-7E37-4CB8-8307-4CA0B9E312D6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EF.DbContextFactory.Examples.SimpleInjector", "EF.DbContextFactory.Examples.SimpleInjector\EF.DbContextFactory.Examples.SimpleInjector.csproj", "{70B4A810-382C-4DB1-B24F-25B2302DAE6C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -153,6 +155,10 @@ Global
 		{55327DAB-7E37-4CB8-8307-4CA0B9E312D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55327DAB-7E37-4CB8-8307-4CA0B9E312D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55327DAB-7E37-4CB8-8307-4CA0B9E312D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70B4A810-382C-4DB1-B24F-25B2302DAE6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70B4A810-382C-4DB1-B24F-25B2302DAE6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70B4A810-382C-4DB1-B24F-25B2302DAE6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70B4A810-382C-4DB1-B24F-25B2302DAE6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -181,6 +187,7 @@ Global
 		{BF6E882D-32C9-459E-90C9-B8A9B6C33181} = {9F22B7C5-2A6D-42BC-8576-7915F9B1DEB2}
 		{135EEF22-B3AD-4765-90DE-AECF97D9047D} = {4B227D6C-0E47-4A5E-AA1E-DB9911ECAE77}
 		{55327DAB-7E37-4CB8-8307-4CA0B9E312D6} = {9F22B7C5-2A6D-42BC-8576-7915F9B1DEB2}
+		{70B4A810-382C-4DB1-B24F-25B2302DAE6C} = {4D0287F8-9E4F-4A25-AE97-7318504AE1C5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5EABDFD2-D616-40CD-BDC7-C38187FF1141}
