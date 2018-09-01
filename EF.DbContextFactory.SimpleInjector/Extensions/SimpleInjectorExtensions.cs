@@ -23,7 +23,7 @@ namespace EF.DbContextFactory.SimpleInjector.Extensions
                     return () => (TDataContext)Activator.CreateInstance(typeof(TDataContext), nameOrConnectionString);
 
                 return () => (TDataContext)Activator.CreateInstance(typeof(TDataContext));
-            });
+            }, Lifestyle.Scoped);
         }
     }
 }

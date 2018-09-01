@@ -56,13 +56,26 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OrderManager.cs" />
+    <Compile Include="SimpleInjectorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EF.DbContextFactory.Data\EF.DbContextFactory.Examples.Data.csproj">
+      <Project>{fcd8d62d-2699-4601-a29a-e144db466319}</Project>
+      <Name>EF.DbContextFactory.Examples.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EF.DbContextFactory.SimpleInjector\EF.DbContextFactory.SimpleInjector.csproj">
+      <Project>{135eef22-b3ad-4765-90de-aecf97d9047d}</Project>
+      <Name>EF.DbContextFactory.SimpleInjector</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
