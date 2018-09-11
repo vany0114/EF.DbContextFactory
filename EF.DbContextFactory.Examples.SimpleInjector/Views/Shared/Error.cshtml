@@ -1,0 +1,51 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Error</title>
+</head>
+<body>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="error-container">
+            <div class="well">
+                <h1 class="grey lighter smaller">
+                    Error from server
+                </h1>
+
+                <hr />
+                <h3 class="lighter smaller">
+                    Error details:
+                </h3>
+
+                <p>
+                    <strong>
+                        @Model.Exception.Message
+                    </strong>
+                    @{
+                        if (Model.Exception.InnerException != null)
+                        {
+                            <label>@Model.Exception.InnerException.Message</label>
+                        }
+                    }
+                </p>
+
+                <div class="space"></div>
+
+                <hr />
+                <div class="space"></div>
+                    
+                <h4 class="lighter smaller">
+                    I bet you didn't use EF.DbContextFactory :(
+                </h4>
+            </div>
+        </div>
+
+        <!-- /section:pages/error -->
+        <!-- PAGE CONTENT ENDS -->
+    </div><!-- /.col -->
+</div><!-- /.row -->
+</body>
+</html>
