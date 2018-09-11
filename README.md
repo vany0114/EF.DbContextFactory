@@ -140,6 +140,17 @@ using EF.DbContextFactory.Unity.Extensions;
 container.AddDbContextFactory<OrderContext>();
 ``` 
 
+### SimpleInjector Asp.Net Mvc and Web Api
+If you are using SimpleInjector as DI container into your Asp.Net Mvc or Web Api project you must install [EF.DbContextFactory.SimpleInjector](https://www.nuget.org/packages/EF.DbContextFactory.SimpleInjector/) nuget package. After that, you are able to access the extension method from the `Container` object from SimpleInjector.
+
+```cs
+using EF.DbContextFactory.SimpleInjector.Extensions;
+.
+.
+.
+container.AddDbContextFactory<OrderContext>();
+``` 
+
 ### Asp.Net Core
 If you are working with Asp.Net Core you probably know that it brings its own Dependency Injection container, so you don't need to install another package or framework to deal with it. So you only need to install [EFCore.DbContextFactory](https://www.nuget.org/packages/EFCore.DbContextFactory/) nuget package. After that, you are able to access to the extension method from the `ServiceCollection` object from Asp.Net Core. 
 
