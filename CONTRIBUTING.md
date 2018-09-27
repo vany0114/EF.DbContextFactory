@@ -2,7 +2,7 @@ The general process for working with EF.DbContextFactory is:
 
 1. [Fork](http://help.github.com/forking/) on GitHub
 1. Clone your fork locally
-1. Create a local branch (`git checkout -b myBranch`)
+1. Create a local branch
 1. Work on your feature
 1. Rebase/merge if required (from `develop` branch)
 1. Push the branch up to GitHub 
