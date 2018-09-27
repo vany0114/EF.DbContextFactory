@@ -2,6 +2,8 @@
 <!--- [![Visual Studio Team services](https://ef-dbcontextfactory.visualstudio.com/_apis/public/build/definitions/052e796b-6387-4c07-9c1e-2b471f0ea629/1/badge)](https://ef-dbcontextfactory.visualstudio.com) --->
 [![Appveyor](https://ci.appveyor.com/api/projects/status/610ww7c83vqvxa6c?svg=true)](https://ci.appveyor.com/project/vany0114/ef-dbcontextfactory)
 [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=With+EF.DbContextFactory+you+can+resolve+easily+your+DbContext+dependencies+in+a+safe+way+injecting+a+factory+instead+of+an+instance+itself%2C+enabling+you+to+work+in+multi-thread+contexts+with+Entity+Framework+or+just+work+safest+with+DbContext+following+the+Microsoft+recommendations+about+the+DbContext+lifetime.&url=https://github.com/vany0114/EF.DbContextFactory&hashtags=EF.DbContextFactory,EntityFramework,DbContext,Thread-Safe)
+[![GitHub Issues](https://img.shields.io/github/issues/vany0114/EF.DbContextFactory.svg)](https://github.com/vany0114/EF.DbContextFactory/issues)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 With EF.DbContextFactory you can resolve easily your DbContext dependencies in a safe way injecting a factory instead of an instance itself, enabling you to work in [multi-thread contexts](https://msdn.microsoft.com/en-us/library/jj729737(v=vs.113).aspx?f=255&mspperror=-2147217396#Anchor_3) with Entity Framework or just work safest with DbContext following the Microsoft recommendations about the [DbContext lifecycle](https://msdn.microsoft.com/en-us/library/jj729737(v=vs.113).aspx?f=255&mspperror=-2147217396#Anchor_1) but keeping your code clean and testable using dependency injection pattern.
 
