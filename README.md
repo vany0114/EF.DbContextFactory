@@ -1,31 +1,21 @@
 # EF.DbContextFactory
-With EF.DbContextFactory you can resolve easily your DbContext dependencies in a safe way injecting a factory instead of an instance itself, enabling you to work in [multi-thread contexts](https://msdn.microsoft.com/en-us/library/jj729737(v=vs.113).aspx?f=255&mspperror=-2147217396#Anchor_3) with Entity Framework or just work safest with DbContext following the Microsoft recommendations about the [DbContext lifecycle](https://msdn.microsoft.com/en-us/library/jj729737(v=vs.113).aspx?f=255&mspperror=-2147217396#Anchor_1) but keeping your code clean and testable using dependency injection pattern.
-
-## Build Status ##
 <!--- [![Visual Studio Team services](https://ef-dbcontextfactory.visualstudio.com/_apis/public/build/definitions/052e796b-6387-4c07-9c1e-2b471f0ea629/1/badge)](https://ef-dbcontextfactory.visualstudio.com) --->
 [![Appveyor](https://ci.appveyor.com/api/projects/status/610ww7c83vqvxa6c?svg=true)](https://ci.appveyor.com/project/vany0114/ef-dbcontextfactory)
+[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=With+EF.DbContextFactory+you+can+resolve+easily+your+DbContext+dependencies+in+a+safe+way+injecting+a+factory+instead+of+an+instance+itself%2C+enabling+you+to+work+in+multi-thread+contexts+with+Entity+Framework+or+just+work+safest+with+DbContext+following+the+Microsoft+recommendations+about+the+DbContext+lifetime.&url=https://github.com/vany0114/EF.DbContextFactory&hashtags=EF.DbContextFactory,EntityFramework,DbContext,Thread-Safe)
+
+With EF.DbContextFactory you can resolve easily your DbContext dependencies in a safe way injecting a factory instead of an instance itself, enabling you to work in [multi-thread contexts](https://msdn.microsoft.com/en-us/library/jj729737(v=vs.113).aspx?f=255&mspperror=-2147217396#Anchor_3) with Entity Framework or just work safest with DbContext following the Microsoft recommendations about the [DbContext lifecycle](https://msdn.microsoft.com/en-us/library/jj729737(v=vs.113).aspx?f=255&mspperror=-2147217396#Anchor_1) but keeping your code clean and testable using dependency injection pattern.
 
 ## Packages Status ##
 
-* [EFCore.DbContextFactory](#aspnet-core)
-[![](https://img.shields.io/nuget/v/EFCore.DbContextFactory.svg)](https://www.nuget.org/packages/EFCore.DbContextFactory/)
-[![NuGet](https://img.shields.io/nuget/dt/EFCore.DbContextFactory.svg)](https://www.nuget.org/packages/EFCore.DbContextFactory/)
-* [EF.DbContextFactory.Unity](#unity-aspnet-mvc-and-web-api)
-[![](https://img.shields.io/nuget/v/EF.DbContextFactory.Unity.svg)](https://www.nuget.org/packages/EF.DbContextFactory.Unity/)
-[![NuGet](https://img.shields.io/nuget/dt/EF.DbContextFactory.Unity.svg)](https://www.nuget.org/packages/EF.DbContextFactory.Unity/)
-* [EF.DbContextFactory.Ninject](#ninject-aspnet-mvc-and-web-api)
-[![](https://img.shields.io/nuget/v/EF.DbContextFactory.Ninject.svg)](https://www.nuget.org/packages/EF.DbContextFactory.Ninject/)
-[![NuGet](https://img.shields.io/nuget/dt/EF.DbContextFactory.Ninject.svg)](https://www.nuget.org/packages/EF.DbContextFactory.Ninject/)
-* [EF.DbContextFactory.StructureMap](#structuremap-aspnet-mvc-and-web-api)
-[![](https://img.shields.io/nuget/v/EF.DbContextFactory.StructureMap.svg)](https://www.nuget.org/packages/EF.DbContextFactory.StructureMap/)
-[![NuGet](https://img.shields.io/nuget/dt/EF.DbContextFactory.StructureMap.svg)](https://www.nuget.org/packages/EF.DbContextFactory.StructureMap/)
-* [EF.DbContextFactory.StructureMap.WebApi](#structuremap-410361-aspnet-mvc-and-web-api-or-webapistructuremap)
-[![](https://img.shields.io/nuget/v/EF.DbContextFactory.StructureMap.WebApi.svg)](https://www.nuget.org/packages/EF.DbContextFactory.StructureMap.WebApi/)
-[![NuGet](https://img.shields.io/nuget/dt/EF.DbContextFactory.StructureMap.WebApi.svg)](https://www.nuget.org/packages/EF.DbContextFactory.StructureMap.WebApi/)
-* [EF.DbContextFactory.SimpleInjector](#simpleinjector-aspnet-mvc-and-web-api)
-[![](https://img.shields.io/nuget/v/EF.DbContextFactory.SimpleInjector.svg)](https://www.nuget.org/packages/EF.DbContextFactory.SimpleInjector/)
-[![NuGet](https://img.shields.io/nuget/dt/EF.DbContextFactory.SimpleInjector.svg)](https://www.nuget.org/packages/EF.DbContextFactory.SimpleInjector/)
-
+|<span>   |   |   |
+|---|---|---|
+|[EFCore.DbContextFactory](#aspnet-core)   |[![](https://img.shields.io/nuget/v/EFCore.DbContextFactory.svg)](https://www.nuget.org/packages/EFCore.DbContextFactory/)   |[![NuGet](https://img.shields.io/nuget/dt/EFCore.DbContextFactory.svg)](https://www.nuget.org/packages/EFCore.DbContextFactory/)   |
+|[EF.DbContextFactory.Unity](#unity-aspnet-mvc-and-web-api)   |[![](https://img.shields.io/nuget/v/EF.DbContextFactory.Unity.svg)](https://www.nuget.org/packages/EF.DbContextFactory.Unity/)   |[![NuGet](https://img.shields.io/nuget/dt/EF.DbContextFactory.Unity.svg)](https://www.nuget.org/packages/EF.DbContextFactory.Unity/)   |
+|[EF.DbContextFactory.Ninject](#ninject-aspnet-mvc-and-web-api)   |[![](https://img.shields.io/nuget/v/EF.DbContextFactory.Ninject.svg)](https://www.nuget.org/packages/EF.DbContextFactory.Ninject/)   |[![NuGet](https://img.shields.io/nuget/dt/EF.DbContextFactory.Ninject.svg)](https://www.nuget.org/packages/EF.DbContextFactory.Ninject/)   |
+|[EF.DbContextFactory.StructureMap](#structuremap-aspnet-mvc-and-web-api)   |[![](https://img.shields.io/nuget/v/EF.DbContextFactory.StructureMap.svg)](https://www.nuget.org/packages/EF.DbContextFactory.StructureMap/)   |[![NuGet](https://img.shields.io/nuget/dt/EF.DbContextFactory.StructureMap.svg)](https://www.nuget.org/packages/EF.DbContextFactory.StructureMap/)   |
+|[EF.DbContextFactory.StructureMap.WebApi](#structuremap-410361-aspnet-mvc-and-web-api-or-webapistructuremap)   |[![](https://img.shields.io/nuget/v/EF.DbContextFactory.StructureMap.WebApi.svg)](https://www.nuget.org/packages/EF.DbContextFactory.StructureMap.WebApi/)   |[![NuGet](https://img.shields.io/nuget/dt/EF.DbContextFactory.StructureMap.WebApi.svg)](https://www.nuget.org/packages/EF.DbContextFactory.StructureMap.WebApi/)   |
+|[EF.DbContextFactory.SimpleInjector](#simpleinjector-aspnet-mvc-and-web-api)   |[![](https://img.shields.io/nuget/v/EF.DbContextFactory.SimpleInjector.svg)](https://www.nuget.org/packages/EF.DbContextFactory.SimpleInjector/)   |[![NuGet](https://img.shields.io/nuget/dt/EF.DbContextFactory.SimpleInjector.svg)](https://www.nuget.org/packages/EF.DbContextFactory.SimpleInjector/)   |
+    
 ## The Problem
 The Entity Framework DbContext has a well-known problem: it’s not thread safe. So it means, you can’t get an instance of the same entity class tracked by multiple contexts at the same time. For example, if you have a realtime, collaborative, concurrency or reactive application/scenario, using, for instance, SignalR or multiple threads in background (which are common characteristics in modern applications). I bet you have faced this kind of exception:
 
