@@ -189,13 +189,13 @@ services.AddDbContextFactory<OrderContext>(builder => builder
     .UseLoggerFactory(dbLogger));
 ``` 
 
-## Examples
+## Examples :metal:
 
 You can find the examples in this repository and you can see the examples with Ninject, Structuremap, Structuremap.WebApi, Unity and Asp.Net Core, all you need is to run the migrations and that's it. Every example project has two controllers, one to receive a repository that implements the DbContextFactory and another one that doesn't, and every one creates and deletes orders at the same time in different threads to simulate the concurrency. So you can see how the one that doesn't implement the DbContextFactory throws errors related to concurrency issues.
 
 ![](example.gif)
 
-## Contribution
+## Contribution :heart: :muscle:
 
 Your contributions are always welcome, feel free to improve it or create new extensions for others dependency injection frameworks! All your work should be done in your forked repository. Once you finish your work, please send a pull request onto dev branch for review.
  
