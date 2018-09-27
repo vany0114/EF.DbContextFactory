@@ -198,7 +198,7 @@ You can find the examples in this repository and you can see the examples with N
 
 ## Contribution :heart: :muscle:
 
-Your contributions are always welcome, feel free to improve it or create new extensions for others dependency injection frameworks! All your work should be done in your forked repository. Once you finish your work, please send a pull request onto dev branch for review.
+Your contributions are always welcome, feel free to improve it or create new extensions for others dependency injection frameworks! All your work should be done in your forked repository. Once you finish your work, please send a pull request onto dev branch for review. For more details take a look at [PR check list](https://github.com/vany0114/EF.DbContextFactory/blob/master/PULL_REQUEST_TEMPLATE.md).
  
 Visit my blog <http://elvanydev.com/EF-DbContextFactory/> to view the whole post and to know the motivation for this project!
  
