@@ -2,6 +2,7 @@
 <!--- [![Visual Studio Team services](https://ef-dbcontextfactory.visualstudio.com/_apis/public/build/definitions/052e796b-6387-4c07-9c1e-2b471f0ea629/1/badge)](https://ef-dbcontextfactory.visualstudio.com) --->
 [![Appveyor](https://ci.appveyor.com/api/projects/status/610ww7c83vqvxa6c?svg=true)](https://ci.appveyor.com/project/vany0114/ef-dbcontextfactory)
 [![GitHub Issues](https://img.shields.io/github/issues/vany0114/EF.DbContextFactory.svg)](https://github.com/vany0114/EF.DbContextFactory/issues)
+[![first-timers-only](https://img.shields.io/badge/first--timers--only-friendly-blue.svg?style=flat-square)](https://www.firsttimersonly.com/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/vany0114/EF.DbContextFactory/blob/master/LICENSE)
 [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=With+EF.DbContextFactory+you+can+resolve+easily+your+DbContext+dependencies+in+a+safe+way+injecting+a+factory+instead+of+an+instance+itself%2C+enabling+you+to+work+in+multi-thread+contexts+with+Entity+Framework+or+just+work+safest+with+DbContext+following+the+Microsoft+recommendations+about+the+DbContext+lifetime.&url=https://github.com/vany0114/EF.DbContextFactory&hashtags=EF.DbContextFactory,EntityFramework,DbContext,Thread-Safe)
 
