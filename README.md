@@ -35,6 +35,12 @@ There are multiple solutions to manage concurrency scenarios from data perspecti
 * Works in concurrency scenarios.
 * Without locking.
 
+## Motivation :sunglasses:
+
+I have worked with Entity Framework in a lot of projects, it’s very useful, it can make you more productive and it has a lot of great features that make it an awesome ORM, but like everything in the world, it has its downsides or issues. Sometime I was working in a project with concurrency scenarios, reading a queue from a message bus, sending messages to another bus with SignalR and so on. Everything was going good until I did a real test with multiple users connected at the same time, it turns out Entity Framework doesn’t work fine in that scenario. I did know that DbContext is not thread safe therefore I was injecting my DbContext instance per request following the Microsoft recommendatios so every request would has a new instance and then avoid problems sharing the contexts and state’s entities inside the context, but it doesn’t work in concurrency scenarios. I really had a problem, beause I didn’t want to hardcode DbContext creation inside my repository using the using statement to create and dispose inmediatly, but I had to support concurrency scenarios with Entity Framework in a proper way. So I remembered sometime studying the awesome CQRS Journey Microsoft project, where those guys were injecting their repositories like a factory and one of them explained me why. This was his answer:
+
+> This is to avoid having a permanent reference to an instance of the context. Entity Framework context life cycles should be as short as possible. Using a delegate, the context is instantiated and disposed inside the class it is injected in and on every needs.
+
 ## Getting Started :grinning:
 
 EF.DbContextFactory provides you integration with most popular dependency injection frameworks such as [Unity](https://github.com/unitycontainer/unity), [Ninject](http://www.ninject.org/), [Structuremap](http://structuremap.github.io/), [Simple Injector](https://simpleinjector.org/index.html) and [.Net Core](https://dotnet.github.io/). So there five Nuget packages so far listed above that you can use like an extension to inject your DbContext as a factory.
