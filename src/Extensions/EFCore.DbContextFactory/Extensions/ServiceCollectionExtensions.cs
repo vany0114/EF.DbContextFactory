@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
 
 namespace EFCore.DbContextFactory.Extensions
 {
@@ -58,10 +58,7 @@ namespace EFCore.DbContextFactory.Extensions
             var serviceProvider = services.BuildServiceProvider();
             var options = serviceProvider.GetService<DbContextOptions<TDataContext>>();
 
-            services.AddScoped<Func<TDataContext>>(ctx =>
-            {
-                return () => (TDataContext)Activator.CreateInstance(typeof(TDataContext), options);
-            });
+            services.AddScoped<Func<TDataContext>>(ctx => () => (TDataContext)Activator.CreateInstance(typeof(TDataContext), options));
         }
 
         private static void AddCoreServices<TContextImplementation>(
