@@ -21,7 +21,7 @@ namespace EFCore.DbContextFactory.IntegrationTest
                 .UseStartup<Startup>());
         }
 
-        [Fact(DisplayName ="EFCore_add_orders_without_EF_DbContextFactory", Skip = "I don't know how the threads work on CI, because it doesn't return an exception on Appveyor nor VSTS")]
+        [Fact(DisplayName ="EFCore_add_orders_without_EF_DbContextFactory")]
         public async Task EFCore_add_orders_without_EF_DbContextFactory()
         {
             var repo = (OrderRepository)_server.Host.Services.GetService(typeof(OrderRepository));
@@ -63,7 +63,7 @@ namespace EFCore.DbContextFactory.IntegrationTest
             task.Wait();
 
             Assert.Equal(TaskStatus.RanToCompletion, task.Status);
-            Assert.Equal(0, repo.GetAllOrders().Count());
+            Assert.Empty(repo.GetAllOrders());
         }
 
         [Fact(DisplayName = "EFCore_delete_orders_without_EF_DbContextFactory")]
