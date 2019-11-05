@@ -286,3 +286,11 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+
+artifacts
+build
+tools
+
+*.lock.json
+*.nuget.targets
+*.nuget.props
