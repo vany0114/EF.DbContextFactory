@@ -100,7 +100,7 @@ public class OrderRepositoryWithFactory : IOrderRepository
 ### EFCore.DbContextFactory
 If you are using the Microsoft DI container you only need to install [EFCore.DbContextFactory](https://www.nuget.org/packages/EFCore.DbContextFactory/) nuget package. After that, you are able to access to the extension method from the `ServiceCollection` object. 
 
->EFCore.DbContextFactory is supports `netstandard2.0` and `netstandard2.1`
+>EFCore.DbContextFactory supports `netstandard2.0` and `netstandard2.1`
 
 The easiest way to resolve your DbContext factory is using the extension method called `AddSqlServerDbContextFactory`. It automatically configures your DbContext to use SqlServer and you can pass it optionally  the name or the connection string itself ***If you have the default one (DefaultConnection) in the configuration file, you dont need to specify it*** and your `ILoggerFactory`, if you want.
 
