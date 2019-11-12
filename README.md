@@ -142,6 +142,8 @@ services.AddDbContextFactory<OrderContext>(builder => builder
     .UseLoggerFactory(dbLogger));
 ``` 
 
+> You can find more examples [here](https://github.com/vany0114/EF.DbContextFactory.Samples)
+
 
 ### Ninject Asp.Net Mvc and Web Api
 If you are using Ninject as DI container into your Asp.Net Mvc or Web Api project you must install [EF.DbContextFactory.Ninject](https://www.nuget.org/packages/EF.DbContextFactory.Ninject/) nuget package. After that, you are able to access to the extension method from the `Kernel` object from Ninject.
