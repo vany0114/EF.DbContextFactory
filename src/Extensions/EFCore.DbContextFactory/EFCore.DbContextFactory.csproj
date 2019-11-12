@@ -37,6 +37,6 @@
     <PackageIconUrl>https://raw.githubusercontent.com/vany0114/EF.DbContextFactory/master/nuget-icon.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/vany0114/EF.DbContextFactory</PackageProjectUrl>
     <PackageTags>EF EntityFramework EntityFrameworkCore dotnet dotnetcore DI IoC DbContext DbContextFactory ThreadSafe MultiThread Thread-Safe Multi-Thread DependencyInjection Dependency-Injection InverionOfControl Inversion-Of-Control Entity-Framework  dotnet-core dot-net-core</PackageTags>
-    <PackageReleaseNotes>See https://github.com/vany0114/EF.DbContextFactory/blob/master/CHANGELOG.md for details</PackageReleaseNotes>
+    <PackageReleaseNotes>See https://github.com/vany0114/EF.DbContextFactory/blob/master/src/Extensions/EFCore.DbContextFactory/CHANGELOG.md for details</PackageReleaseNotes>
   </PropertyGroup>
 </Project>
