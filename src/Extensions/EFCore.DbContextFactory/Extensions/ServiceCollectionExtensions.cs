@@ -9,6 +9,9 @@ using System.Collections.Generic;
 
 namespace EFCore.DbContextFactory.Extensions
 {
+    /// <summary>
+    /// Extensions to add AddDbContextFactory
+    /// </summary>
     public static class ServiceCollectionExtensions
     {
         /// <summary>
@@ -17,7 +20,7 @@ namespace EFCore.DbContextFactory.Extensions
         /// <typeparam name="TDataContext">The DbContext.</typeparam>
         /// <param name="services"></param>
         /// <param name="nameOrConnectionString">Name or connection string of the context. (Optional)</param>
-        /// <param name="logger">The <see cref="ILoggerFactory" implementation./></param>
+        /// <param name="logger">The <see cref="ILoggerFactory"/>implementation.</param>
         public static void AddSqlServerDbContextFactory<TDataContext>(this IServiceCollection services, string nameOrConnectionString = null, ILoggerFactory logger = null)
             where TDataContext : DbContext
         {

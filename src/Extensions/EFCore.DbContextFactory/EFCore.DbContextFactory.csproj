@@ -1,12 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
-    <Authors>Geovanny Alzate Sandoval</Authors>
+    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>   
+    <Version>2.0.0</Version>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
+    <FileVersion>2.0.0</FileVersion>
+    <InformationalVersion>2.0.0</InformationalVersion>
+    <PackageVersion>2.0.0</PackageVersion>
     <Company>Geovanny Alzate Sandoval</Company>
-    <Version>1.0.2</Version>
-    <AssemblyVersion>1.0.0.2</AssemblyVersion>
-    <FileVersion>1.0.0.2</FileVersion>
+    <Copyright>Copyright (c) 2017, Geovanny Alzate Sandoval</Copyright>
+    <Description>With EFCore.DbContextFactory you can resolve easily your DbContext dependencies in a safe way injecting a factory instead of an instance itself, enabling you to work in multi-thread contexts with Entity Framework Core or just work safest with DbContext following the Microsoft recommendations about the DbContext lifetime.</Description>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Authors>Geovanny Alzate Sandoval</Authors>
+    <AssemblyOriginatorKeyFile>EFCore.DbContextFactory.snk</AssemblyOriginatorKeyFile>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,4 +30,13 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
   </ItemGroup>
 
+  <PropertyGroup Label="NuspecProperties">
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <AssemblyTitle>EFCore.DbContextFactory</AssemblyTitle>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIconUrl>https://raw.githubusercontent.com/vany0114/EF.DbContextFactory/master/nuget-icon.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/vany0114/EF.DbContextFactory</PackageProjectUrl>
+    <PackageTags>EF EntityFramework EntityFrameworkCore dotnet dotnetcore DI IoC DbContext DbContextFactory ThreadSafe MultiThread Thread-Safe Multi-Thread DependencyInjection Dependency-Injection InverionOfControl Inversion-Of-Control Entity-Framework  dotnet-core dot-net-core</PackageTags>
+    <PackageReleaseNotes>See https://github.com/vany0114/EF.DbContextFactory/blob/master/src/Extensions/EFCore.DbContextFactory/CHANGELOG.md for details</PackageReleaseNotes>
+  </PropertyGroup>
 </Project>
