@@ -24,6 +24,21 @@ namespace EFCore.DbContextFactory.Extensions
         public static void AddSqlServerDbContextFactory<TDataContext>(this IServiceCollection services, string nameOrConnectionString = null, ILoggerFactory logger = null)
             where TDataContext : DbContext
         {
+            services.AddSqlServerDbContextFactory<TDataContext, TDataContext>(nameOrConnectionString, logger);
+        }
+
+        /// <summary>
+        /// Configures the resolution of <typeparamref name="TContextService"/>'s factory.
+        /// </summary>
+        /// <typeparam name="TContextService">The DbContext service type.</typeparam>
+        /// <typeparam name="TContextImplementation">The DbContent implementation type.</typeparam>
+        /// <param name="services"></param>
+        /// <param name="nameOrConnectionString">Name or connection string of the context. (Optional)</param>
+        /// <param name="logger">The <see cref="ILoggerFactory"/>implementation.</param>
+        public static void AddSqlServerDbContextFactory<TContextService, TContextImplementation>(this IServiceCollection services, string nameOrConnectionString = null, ILoggerFactory logger = null)
+            where TContextService : class
+            where TContextImplementation : DbContext, TContextService
+        {
             if (string.IsNullOrEmpty(nameOrConnectionString))
             {
                 var serviceProvider = services.BuildServiceProvider();
@@ -31,7 +46,7 @@ namespace EFCore.DbContextFactory.Extensions
                 nameOrConnectionString = configuration.GetConnectionString("DefaultConnection");
             }
 
-            AddDbContextFactory<TDataContext>(services, (provider, builder) =>
+            AddDbContextFactory<TContextService, TContextImplementation>(services, (provider, builder) =>
                 builder.UseSqlServer(nameOrConnectionString)
                     .UseLoggerFactory(logger)
             );
@@ -46,7 +61,20 @@ namespace EFCore.DbContextFactory.Extensions
         public static void AddDbContextFactory<TDataContext>(this IServiceCollection services,
             Action<DbContextOptionsBuilder> options)
             where TDataContext : DbContext
-            => AddDbContextFactory<TDataContext>(services, (provider, builder) => options.Invoke(builder));
+            => AddDbContextFactory<TDataContext, TDataContext>(services, (provider, builder) => options.Invoke(builder));
+
+        /// <summary>
+        /// Configures the resolution of <typeparamref name="TContextService"/>'s factory.
+        /// </summary>
+        /// <typeparam name="TContextService">The DbContext service type.</typeparam>
+        /// <typeparam name="TContextImplementation">The DbContext implementation type.</typeparam>
+        /// <param name="services"></param>
+        /// <param name="options">The DbContext options.</param>
+        public static void AddDbContextFactory<TContextService, TContextImplementation>(this IServiceCollection services,
+            Action<DbContextOptionsBuilder> options)
+            where TContextService : class
+            where TContextImplementation : DbContext, TContextService
+            => AddDbContextFactory<TContextService, TContextImplementation>(services, (provider, builder) => options.Invoke(builder));
 
         /// <summary>
         /// Configures the resolution of <typeparamref name="TDataContext"/>'s factory.
@@ -57,18 +85,33 @@ namespace EFCore.DbContextFactory.Extensions
         public static void AddDbContextFactory<TDataContext>(this IServiceCollection services, Action<IServiceProvider, DbContextOptionsBuilder> optionsAction)
             where TDataContext : DbContext
         {
-            AddCoreServices<TDataContext>(services, optionsAction, ServiceLifetime.Scoped);
-            var serviceProvider = services.BuildServiceProvider();
-            var options = serviceProvider.GetService<DbContextOptions<TDataContext>>();
-
-            services.AddScoped<Func<TDataContext>>(ctx => () => (TDataContext)Activator.CreateInstance(typeof(TDataContext), options));
+            services.AddDbContextFactory<TDataContext, TDataContext>(optionsAction);
         }
 
-        private static void AddCoreServices<TContextImplementation>(
+        /// <summary>
+        /// Configures the resolution of <typeparamref name="TContextService"/>'s factory.
+        /// </summary>
+        /// <typeparam name="TContextService">The DbContext service type.</typeparam>
+        /// <typeparam name="TContextImplementation">The DbContext implementation type.</typeparam>
+        /// <param name="services"></param>
+        /// <param name="optionsAction">Service provider and DbContext options.</param>
+        public static void AddDbContextFactory<TContextService, TContextImplementation>(this IServiceCollection services, Action<IServiceProvider, DbContextOptionsBuilder> optionsAction)
+            where TContextService : class
+            where TContextImplementation : DbContext, TContextService
+        {
+            AddCoreServices<TContextService, TContextImplementation>(services, optionsAction, ServiceLifetime.Scoped);
+            var serviceProvider = services.BuildServiceProvider();
+            var options = serviceProvider.GetService<DbContextOptions<TContextImplementation>>();
+
+            services.AddScoped<Func<TContextService>>(ctx => () => (TContextService)Activator.CreateInstance(typeof(TContextImplementation), options));
+        }
+
+        private static void AddCoreServices<TContextService, TContextImplementation>(
             IServiceCollection serviceCollection,
             Action<IServiceProvider, DbContextOptionsBuilder> optionsAction,
             ServiceLifetime optionsLifetime)
-            where TContextImplementation : DbContext
+            where TContextService : class
+            where TContextImplementation : DbContext, TContextService
         {
             serviceCollection
                 .AddMemoryCache()
