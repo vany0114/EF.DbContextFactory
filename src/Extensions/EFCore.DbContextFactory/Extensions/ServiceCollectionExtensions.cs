@@ -20,8 +20,12 @@ namespace EFCore.DbContextFactory.Extensions
         /// <typeparam name="TDataContext">The DbContext.</typeparam>
         /// <param name="services"></param>
         /// <param name="nameOrConnectionString">Name or connection string of the context. (Optional)</param>
-        /// <param name="logger">The <see cref="ILoggerFactory"/>implementation.</param>
-        public static void AddSqlServerDbContextFactory<TDataContext>(this IServiceCollection services, string nameOrConnectionString = null, ILoggerFactory logger = null)
+        /// <param name="logger">The <see cref="ILoggerFactory"/>implementation. (Optional)</param>
+        /// <param name="optionsBuilderFactory">A factory for the DbContext Options Builder. (Optional)</param>
+        public static void AddSqlServerDbContextFactory<TDataContext>(this IServiceCollection services,
+            string nameOrConnectionString = null,
+            ILoggerFactory logger = null,
+            Func<DbContextOptionsBuilder<TDataContext>> optionsBuilderFactory = null)
             where TDataContext : DbContext
         {
             if (string.IsNullOrEmpty(nameOrConnectionString))
@@ -31,9 +35,10 @@ namespace EFCore.DbContextFactory.Extensions
                 nameOrConnectionString = configuration.GetConnectionString("DefaultConnection");
             }
 
-            AddDbContextFactory<TDataContext>(services, (provider, builder) =>
-                builder.UseSqlServer(nameOrConnectionString)
-                    .UseLoggerFactory(logger)
+            AddDbContextFactory<TDataContext>(
+                services,
+                (provider, builder) => builder.UseSqlServer(nameOrConnectionString).UseLoggerFactory(logger),
+                optionsBuilderFactory
             );
         }
 
@@ -42,11 +47,13 @@ namespace EFCore.DbContextFactory.Extensions
         /// </summary>
         /// <typeparam name="TDataContext">The DbContext.</typeparam>
         /// <param name="services"></param>
-        /// <param name="options">The DbContext options.</param>
+        /// <param name="optionsAction">The DbContext options.</param>
+        /// <param name="optionsBuilderFactory">A factory for the DbContext Options Builder. (Optional)</param>
         public static void AddDbContextFactory<TDataContext>(this IServiceCollection services,
-            Action<DbContextOptionsBuilder> options)
+            Action<DbContextOptionsBuilder> optionsAction,
+            Func<DbContextOptionsBuilder<TDataContext>> optionsBuilderFactory = null)
             where TDataContext : DbContext
-            => AddDbContextFactory<TDataContext>(services, (provider, builder) => options.Invoke(builder));
+            => AddDbContextFactory<TDataContext>(services, (provider, builder) => optionsAction.Invoke(builder), optionsBuilderFactory);
 
         /// <summary>
         /// Configures the resolution of <typeparamref name="TDataContext"/>'s factory.
@@ -54,10 +61,13 @@ namespace EFCore.DbContextFactory.Extensions
         /// <typeparam name="TDataContext">The DbContext.</typeparam>
         /// <param name="services"></param>
         /// <param name="optionsAction">Service provider and DbContext options.</param>
-        public static void AddDbContextFactory<TDataContext>(this IServiceCollection services, Action<IServiceProvider, DbContextOptionsBuilder> optionsAction)
+        /// <param name="optionsBuilderFactory">A factory for the DbContext Options Builder. (Optional)</param>
+        public static void AddDbContextFactory<TDataContext>(this IServiceCollection services,
+            Action<IServiceProvider, DbContextOptionsBuilder> optionsAction,
+            Func<DbContextOptionsBuilder<TDataContext>> optionsBuilderFactory = null)
             where TDataContext : DbContext
         {
-            AddCoreServices<TDataContext>(services, optionsAction, ServiceLifetime.Scoped);
+            AddCoreServices<TDataContext>(services, optionsAction, optionsBuilderFactory, ServiceLifetime.Scoped);
             var serviceProvider = services.BuildServiceProvider();
             var options = serviceProvider.GetService<DbContextOptions<TDataContext>>();
 
@@ -67,6 +77,7 @@ namespace EFCore.DbContextFactory.Extensions
         private static void AddCoreServices<TContextImplementation>(
             IServiceCollection serviceCollection,
             Action<IServiceProvider, DbContextOptionsBuilder> optionsAction,
+            Func<DbContextOptionsBuilder<TContextImplementation>> optionsBuilderFactory,
             ServiceLifetime optionsLifetime)
             where TContextImplementation : DbContext
         {
@@ -77,7 +88,7 @@ namespace EFCore.DbContextFactory.Extensions
             serviceCollection.TryAdd(
                 new ServiceDescriptor(
                     typeof(DbContextOptions<TContextImplementation>),
-                    p => DbContextOptionsFactory<TContextImplementation>(p, optionsAction),
+                    p => DbContextOptionsFactory<TContextImplementation>(p, optionsAction, optionsBuilderFactory),
                     optionsLifetime));
 
             serviceCollection.Add(
@@ -89,11 +100,13 @@ namespace EFCore.DbContextFactory.Extensions
 
         private static DbContextOptions<TContext> DbContextOptionsFactory<TContext>(
             IServiceProvider applicationServiceProvider,
-            Action<IServiceProvider, DbContextOptionsBuilder> optionsAction)
+            Action<IServiceProvider, DbContextOptionsBuilder> optionsAction,
+            Func<DbContextOptionsBuilder<TContext>> optionsBuilderFactory)
             where TContext : DbContext
         {
-            var builder = new DbContextOptionsBuilder<TContext>(
-                new DbContextOptions<TContext>(new Dictionary<Type, IDbContextOptionsExtension>()));
+            DbContextOptionsBuilder<TContext> builder = optionsBuilderFactory?.Invoke()
+                ?? new DbContextOptionsBuilder<TContext>(
+                    new DbContextOptions<TContext>(new Dictionary<Type, IDbContextOptionsExtension>()));
 
             builder.UseApplicationServiceProvider(applicationServiceProvider);
             optionsAction?.Invoke(applicationServiceProvider, builder);
